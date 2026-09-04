@@ -18,6 +18,9 @@ public class Assignment {
     private LocalDate dueDate;
     private String category; // New field for category
 
+    public Assignment() {
+    }
+
     // Getters and setters
     public Long getId() {
         return id;
