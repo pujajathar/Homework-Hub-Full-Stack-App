@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { mockAssignments, mockStudents } from "../mockData";
 import AssignmentForm from "../AssignmentForm/AssignmentForm";
@@ -8,7 +8,7 @@ import Button from "../Button/Button";
 import teacher from "../../assets/images/teacher.png";
 import './TeachersPage.css';
 import AssignmentList from "../AssignmentList/AssignmentList";
-import { createAssignment } from "../Api/AssignmentApi.js";
+import {getAssignments, createAssignment } from "../Api/AssignmentApi.js";
 import Header from "../Header/Header";
 
 function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } ) {
@@ -24,8 +24,20 @@ function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } )
     const [replyId, setReplyId] = useState(null); //stores which parent reply section is open
     const [replyText, setReplyText] = useState(""); //stores reply message text
     const [replySent, setReplySent] = useState(false); //controls reply success message display
+
+    useEffect(() => {
+    getAssignments()
+        .then(data => {
+            setAssignments(data);
+        })
+        .catch(error => {
+            console.error("Error fetching assignments:", error);
+        });
+    }, [setAssignments]);
+
     const navigate = useNavigate();
-   const handleLogout = () => {
+
+    const handleLogout = () => {
         setUser(null);
         navigate("/");
     } 
@@ -92,7 +104,7 @@ function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } )
          <div className="two-col">
                <div className="card">
                     <div className="card-header">
-                <h2 style={ {'font-size':"25px"}}>📝 Assignments 📝</h2> 
+                <h2 style={ {'fontSize':"25px"}}>📝 Assignments 📝</h2> 
                     <button
                     className="btn btn-green" variant="green"
                     onClick={() => {   //cleares edit mode when creating new assignment
