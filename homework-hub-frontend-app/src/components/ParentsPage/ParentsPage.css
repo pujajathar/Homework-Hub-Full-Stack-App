@@ -1,0 +1,125 @@
+
+.progress-label{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: #232730;   
+}
+.progress-label strong {
+    color: #4f46e5;
+}
+.progress-note {
+    font-size: 0.85rem;
+    color: #232730;
+    margin-top: 0.75rem;
+}
+.message-list {
+    list-style: none;
+    padding: 0;
+}
+.message-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+.message-item:last-child {border-bottom: none;}
+.message-item.unread  .message-subject {
+    font-weight: 700;
+}
+.message-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4f46e5;
+    flex-shrink: 0;
+}
+.message-dot.read {
+    background: transparent;
+}
+.message-from {
+    font-weight: 600;
+    color: #1e1b4b;
+    font-size: 0.9rem;
+}
+.message-subject {
+    color: #374151;
+    font-size: 0.88rem;
+}
+.message-date {
+    font-size: 0.78rem;
+    color: #7b89a1;
+    margin-left: auto;
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #fafafa;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: orange;
+    background-color: #fff;
+}
+.contact-form textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/*Media query for Tablet + Mobile */
+@media (max-width: 900px) {
+    .progress-label {
+        font-size: 0.85rem;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+    .progress-note { font-size: 0.8rem;}
+    .message-item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 0.75rem 0;
+    }
+    .message-dot { margin-top: 4px;}
+    .message-from { font-size: 0.85rem;}
+    .message-subject { font-size: 0.82rem;}
+    .message-date {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 4px;
+        font-size: 0.75rem;
+        text-align: left;
+    }
+    .contact-form { gap: 10px;}
+    .contact-form input, .contact-form textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    .contact-form textarea { min-height: 80px;}
+}
+
+
+
+
+
+
+
+
+

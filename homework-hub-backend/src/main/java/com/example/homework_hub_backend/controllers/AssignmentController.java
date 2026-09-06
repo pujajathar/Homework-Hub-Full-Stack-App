@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/assignments")
+@CrossOrigin(origins = "http://localhost:5173") // Allow requests from the React frontend
 public class AssignmentController {
 
     private final AssignmentRepository assignmentRepository;
@@ -38,7 +39,9 @@ public class AssignmentController {
                     assignment.setTitle(updatedAssignment.getTitle());
                     assignment.setDescription(updatedAssignment.getDescription());
                     assignment.setDueDate(updatedAssignment.getDueDate());
-                    assignment.setCategory(updatedAssignment.getCategory()); // Update category
+                    assignment.setCategory(updatedAssignment.getCategory());
+                    assignment.setStatus(updatedAssignment.getStatus());
+                    // Update category and status
                     return assignmentRepository.save(assignment);
                 })
                 .orElseGet(null);

@@ -17,6 +17,7 @@ public class Assignment {
     private String description;
     private LocalDate dueDate;
     private String category; // New field for category
+    private String status;
 
     public Assignment() {
     }
@@ -56,5 +57,13 @@ public class Assignment {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

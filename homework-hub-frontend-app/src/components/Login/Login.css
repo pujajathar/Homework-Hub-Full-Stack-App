@@ -1,0 +1,95 @@
+
+.login-container {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 380px;
+    max-width: calc(100vw - 2rem);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    position: relative;
+}
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.submitbtn {
+    width: 100%;  
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    font-family: inherit;
+    margin-top: 4px;
+    transition: opacity 0.15s;
+}
+.teacher-btn { background-color: #2cc270;}
+.student-btn { background-color: #288edd;}
+.parent-btn { background-color: #dea441;}
+.submitbtn:hover { opacity: 0.85;}
+
+.input-box {
+    border-radius: 15px;
+    width: 100%;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+    padding: 12px;    
+}
+.input-group {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+}
+.input-group label {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+.wave {
+    display: inline-block;
+    animation: wave 1.5s infinite;
+}
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg);}
+    50% { transform: rotate(15deg);}
+}
+.error-msg {
+    color: red;
+    padding: 10px;
+    font-size: 19px;
+}
+/* Media query for Tablets*/
+@media (max-width: 900px) {
+    .login-page { min-height: 100vh; padding: 1rem;}
+    .login-container {
+        width: 100%;
+        max-width: 380px;
+        padding: 2rem;
+        border-radius: 18px;
+    }
+    .submitbtn { font-size: 1.2rem; padding: 10px;}
+    .input-box { width: 100%; font-size: 1rem;}
+    .error-msg { font-size: 16px;}
+}
+
+/*Media query for Mobile*/
+@media (max-width: 480px) {
+    .login-page { padding: 1rem;}
+    .login-container {
+        width: 100%;
+        max-width: 350px;
+        padding: 1.5rem;
+    }
+    .submitbtn { font-size: 1.1rem;}
+}
+

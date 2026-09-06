@@ -1,0 +1,119 @@
+
+.hero {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 3rem;
+ align-items: center;
+ padding: 3rem 0 2rem;
+}
+.hero-left .tagline {
+    align-items: center;
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1e1b4b;
+    margin-bottom: 1rem;
+}
+.hero-left .tagline span {
+    color: #4f46e5;
+}
+.hero-left p {
+    font-size: 1.1rem;
+    color: #2d3138;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.hero-image img {
+    background: linear-gradient(135deg, #e0e7ff, #ddd6fe);
+    border-radius: 50px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeZoom 1s ease-out, schoolFloat 3s ease-in-out 1s infinite;
+}
+/* Floating animation for school emoji*/
+@keyframes fadeZoom {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1);
+    }
+}
+@keyframes schoolFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.role-selction {
+    margin-top: 3rem;
+}
+.role-selection h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1e1b4b;
+    margin-bottom: 1.5rem;
+}
+.role-cards {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.4rem;
+}
+.role-card {
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    color: #fff;
+}
+.role-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.role-card.parent {
+    background: linear-gradient(135deg, #dea441, #d8b081 );
+}
+.role-card.teacher {
+    background: linear-gradient(135deg, #2cc270, #38eaa0 );
+}
+.role-card.student {
+    background: linear-gradient(135deg, #288edb, #7c91c0 );
+}
+.role-card .role-icon {
+    font-size: 2.5rem; margin-bottom: 0.75rem;
+}
+.role-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+.role-card p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+/*Media query for Mobile*/
+@media (max-width: 480px) {  
+    .hero-left .tagline { font-size: 1.8rem;}
+    .hero-buttons {
+        flex-direction: column;
+    }
+}
+/*Media query for Tablets*/
+@media (max-width: 900px) { 
+    .hero {
+        grid-template-columns: 1fr;
+    }
+    .hero-image img {
+    
+        height: 150px; font-size: 4rem;
+    }
+    .role-cards {
+        grid-template-columns: 1fr;
+    }
+}
