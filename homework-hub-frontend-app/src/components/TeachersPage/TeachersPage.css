@@ -1,0 +1,201 @@
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.assignment-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.assignment-row{
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items:center;
+    padding: 18px;
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+}
+.assignment-left{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+}
+.assignment-right{
+    display: flex;
+    align-items: center;   
+    gap: 8px;
+    flex-shrink: 1;
+    flex-wrap: wrap;
+}
+
+.tag{
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+.tag.math{ background-color: rgb(241, 161, 105);}
+.tag.science{ background-color: rgb(218, 112, 149);}
+.tag.english{ background-color: rgb(87, 164, 226);}
+.tag.art{ background-color: rgb(209, 133, 225);}
+.tag.social-studies { background-color: #776ef4;}
+.completed{
+    text-decoration: line-through;
+    color: gray;
+}
+.btn-sm{
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .3s;
+    font-size: 17px;
+    padding: 6px 14px;    
+}
+.message-list {list-style: none; padding: 0;}
+.parent-message-item:last-child{
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.parent-message-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+.message-from {
+    font-weight: 600;
+    color: #1e1b4b; font-size: 0.9rem;
+}
+.message {
+    font-size: 0.85rem;
+    color: #465163
+}
+.profile{
+    background-color: rgb(198, 177, 244);
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    width: 120px;
+    height: 120px;
+    justify-content: center;
+    border: 3px solid #ffff;
+    border-radius: 20px;
+    padding: 15px;
+    gap: 8px;
+}
+.profile img{
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: float 3s ease-in-out infinite;
+    transition: transform 0.3s ease;
+} 
+/*Floating animation for teacher's image*/
+@keyframes float {
+    0%, 100% { transform: translateY(0);}
+    50% { transform: translateY(-8px);}
+}
+.profile img:hover { transform: scale(1.1) rotate(5deg);}
+.profile span{
+    font-size: 18px;
+    font-weight: 600;
+}
+.header-text {
+    display: flex;
+   flex-direction: column;
+}
+.header-text h1{
+   font-size: 34px;
+    margin: 0;
+}
+.header-text p{
+    font-size: 16px;
+}
+.stat-num.green { color: #10b981;}
+.stat-num.amber{
+    color: #f59e0b;
+}
+.stat-label{
+    margin-top: 0.25rem;
+    
+}
+.stat-num.indigo{
+    color: rgb(153, 68, 214);
+}
+.reply-sent {
+    color: #10b981;
+    font-weight: 600;
+    margin-top: 8px;
+    font-size: 15px;
+}
+.reply-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.reply-form input {
+    flex: 1;
+    padding: 7px 12px;
+    border-radius: 8px;
+    border: 1.5px solid #e5e7eb;
+    font-family: inherit;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.card, .assignment-row, .parent-message-row, .parent-message-item:last-child { min-width: 0;}
+
+/* Media query for Tablets */
+@media(max-width: 900px){
+    .two-col { grid-template-columns: 1fr;}
+    .dashboard-header {
+    display: flex;     
+    flex-direction: column; 
+    gap: 20px;
+    align-items: center;
+    text-align: center;    
+}
+    .card { width: 100%; box-sizing: border-box; }
+    .card-header { flex-direction: column; align-items: center; text-align: center;}
+    .assignment-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+     .buttonspace { flex-wrap: wrap;}
+     .assignment-left, .assignment-right { width: 100%; min-width: 0;}
+     .assignment-right { justify-content: center; }
+     .profile { width: 100px; height: 100px;}
+     .profile img { width: 65px; height: 65px;}
+     .header-text h1 { font-size: 28px;}
+     .reply-form { flex-direction: column;}
+     .reply-form input { width: 100%; box-sizing: border-box;}
+}
+/* Media query for Mobile */
+@media (max-width: 480px) {
+    .two-col { grid-template-columns: 1fr; width: 100%; justify-content: center; }
+    .card-header { gap: 8px;}
+    .header-text h1 { font-size: 20px;}
+    .header-text p { font-size: 14px;}
+    .assignment-row { padding: 10px; gap: 10px; }
+    .tag { font-size: 12px; padding: 5px 10px;}
+    .btn-sm { font-size: 14px; padding: 5px 10px;}
+    .profile { width: 85px; height: 85px; padding: 10px;}
+    .profile img { width: 55px; height: 55px;}
+    .message-from { font-size: 0.8rem;}
+    .message { font-size: 0.75rem;}
+    .reply-form input { font-size: 0.8rem;}
+}

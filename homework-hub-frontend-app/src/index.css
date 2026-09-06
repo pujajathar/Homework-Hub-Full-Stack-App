@@ -1,0 +1,21 @@
+.home {
+    background-image: url('./assets/images/background.png');
+    background-position: center;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 30px 120px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/*Media query for Tablet + mobile*/
+@media (max-width: 900px) {
+    .home {
+        padding: 20px;
+        background-position: center;
+        min-height: 100vh;
+        background-size: cover;
+    }
+}
