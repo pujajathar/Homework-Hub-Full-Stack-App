@@ -45,7 +45,9 @@ function App() {
     <Route path='/' element={<HomePage setUser={setUser} />} />
     <Route path='/aboutus' element={<AboutPage />} />
     <Route path='/parents' element={
-    <ProtectedRoute allowedRole="parent">
+    <ProtectedRoute allowedRole="parent"
+    user={user}
+    setUser={setUser}>
     <ParentsPage 
     setUser={setUser}
     assignments={assignments} 
@@ -69,7 +71,10 @@ function App() {
   </ProtectedRoute>
 } />
     <Route path='/students' element={
-    <ProtectedRoute allowedRole="student">
+    <ProtectedRoute allowedRole="student"
+    user={user}
+    setUser={setUser}
+    >
     <StudentsPage 
     setUser={setUser}
     assignments={assignments}
