@@ -6,7 +6,8 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
 
     const [assignment, setAssignment] = useState({
             category: editAssignment?.category || "", // ?. is optional chaining, it prevent error if editAssignment doesn't exists
-            title: editAssignment?.title || "",    // means use the existing category if an assignment is being edited, otherwise use an empty string ""
+            title: editAssignment?.title || "", 
+            description: editAssignment?.description || "", // means use the existing category if an assignment is being edited, otherwise use an empty string ""
             dueDate: editAssignment?.dueDate || "",
             status: editAssignment?.status || "pending"  // default status is pending if not provided
     });
@@ -18,6 +19,7 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
             setAssignment({
                 category:"",
                 title: "",
+                description: "",
                 dueDate: "",
                 status:"pending"
             });
@@ -77,6 +79,16 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                     value={assignment.title} 
                     onChange={handleChange}
                     placeholder="Title of Assignment..."
+                    required
+                    />
+                </label>
+                <label>Description:
+                    <textarea 
+                    name="description"
+                    value={assignment.description}
+                    onChange={handleChange}
+                    placeholder="Description of Assignment..."
+                    rows={4}
                     required
                     />
                 </label>

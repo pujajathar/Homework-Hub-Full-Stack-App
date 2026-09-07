@@ -27,6 +27,9 @@ function AssignmentList ({
                         <h3 className={completedAssignments.includes(assignment.id) ? "completed" : ''}> {/* adds CSS class conditionaly used for text decoration line through */}
                             {assignment.title}
                         </h3>
+                        <p className="description">
+                            {assignment.description}
+                        </p>
                         <p className="due">
                             Due on : {assignment.dueDate}
                         </p>
