@@ -36,18 +36,27 @@ function AssignmentList ({
                             <span className={`tag ${assignment.category?.toLowerCase()}`}>
                                 {assignment.category}
                             </span>
-                        {showActions && ( //only display buttons if showActions is true
-                            <div className='buttonspace'>
-                            <button className='edit-btn'
-                            onClick={() => onEdit(assignment.id)}>
-                                Edit
-                            </button>
-                            <button className='delete-btn'
-                            onClick={() => handleDelete(assignment.id)}>
-                                Delete
-                            </button>
-                            </div>
-                        )}
+                       {showActions && (
+    <div className="buttonspace">
+
+        <button
+            type="button"
+            className="edit-btn"
+            onClick={() => onEdit(assignment.id)}
+        >
+            Edit
+        </button>
+
+        <button
+            type="button"
+            className="delete-btn"
+            onClick={() => handleDelete(assignment.id)}
+        >
+            Delete
+        </button>
+
+    </div>
+)}
                         </div>
                 </div>  
             ))}

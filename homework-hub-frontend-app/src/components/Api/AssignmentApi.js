@@ -20,3 +20,27 @@ export const createAssignment = async (assignment) => {
         }
         return response.json();
     };
+
+    export async function updateAssignment(id, updatedAssignment) {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedAssignment)
+        });
+        if (!response.ok) {
+            throw new Error("Failed to update assignment");
+        }
+        return response.json();
+    };
+
+    export async function deleteAssignment(id) {
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: "DELETE"
+        }); 
+        if (!response.ok) {
+            throw new Error("Failed to delete assignment");
+        } 
+        return true; // Return true to indicate successful deletion
+    };
