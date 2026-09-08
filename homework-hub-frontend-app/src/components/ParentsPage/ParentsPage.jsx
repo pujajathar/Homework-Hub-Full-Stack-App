@@ -20,7 +20,7 @@ function ParentsPage ({ assignments, toggleComplete, completedAssignments, setUs
     const progressPct = assignments.length > 0 ? Math.round(( completed / assignments.length) * 100 ) : 0; //completion pct for progress bar
     const [unread, setUnread] = useState(0); //tracks number of unread notifications
     useEffect(() => {  //fetches unread notifications from backend
-        fetch('http://localhost:8080/notifications/unread')  //fetches unread notifications from backend
+        fetch('http://localhost:8080/notifications/parent/unread')  //fetches unread notifications from backend
         .then((response) => {
             console.log("Response status:", response.status);
             return response.json();
@@ -86,7 +86,9 @@ return (
                 <div className="stat-label">Unread Messages</div>
             </div>
             </section>
-                <Notification onNotificationRead={(change) => setUnread((prev) => Math.max(0, prev + change))} /> {/* Notification component displays notifications from backend */}
+                <Notification 
+                recipient="parent"
+                onNotificationRead={(change) => setUnread((prev) => Math.max(0, prev + change))} /> {/* Notification component displays notifications from backend */}
 
             <div className="two-col">     {/* Main dashboard content */} 
             <section className="card">

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import './Notification.css';
-function Notification({ onNotificationRead }) {
+function Notification({ onNotificationRead, recipient}) {
     const [notifications, setNotifications] = useState([]);
     useEffect(() => {
         const fetchNotifications = () => {
-    fetch('http://localhost:8080/notifications')  //fetches notifications from backend
+    fetch(`http://localhost:8080/notifications/${recipient}`)  //fetches notifications from backend
         .then((response) => {
                         console.log("Response status:", response.status);
                         return response.json();
@@ -20,7 +20,7 @@ function Notification({ onNotificationRead }) {
     fetchNotifications(); //get notifications immediately
     const interval = setInterval(fetchNotifications, 5000); //fetches notifications every 5 seconds
     return () => clearInterval(interval); //clears interval when component unmounts
-}, []);
+}, [recipient]);
 
     const handleToggleRead = (notification) => { 
      //handles marking a notification as read or unread
