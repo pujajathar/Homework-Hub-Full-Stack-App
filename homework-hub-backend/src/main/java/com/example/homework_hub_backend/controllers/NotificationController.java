@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notifications")
+@CrossOrigin(origins = "http://localhost:5173") // Allow requests from the React frontend
 public class NotificationController {
 
     private final NotificationRepository notificationRepository;
