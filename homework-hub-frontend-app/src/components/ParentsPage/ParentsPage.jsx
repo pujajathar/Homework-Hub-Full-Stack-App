@@ -86,7 +86,7 @@ return (
                 <div className="stat-label">Unread Messages</div>
             </div>
             </section>
-                <Notification />  {/* Notification component displays notifications from backend */}
+                <Notification onNotificationRead={(change) => setUnread((prev) => Math.max(0, prev + change))} /> {/* Notification component displays notifications from backend */}
 
             <div className="two-col">     {/* Main dashboard content */} 
             <section className="card">

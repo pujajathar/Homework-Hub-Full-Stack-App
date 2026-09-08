@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import './Notification.css';
-function Notification() {
+function Notification({ onNotificationRead }) {
     const [notifications, setNotifications] = useState([]);
     useEffect(() => {
         const fetchNotifications = () => {
@@ -24,6 +24,7 @@ function Notification() {
 
     const handleToggleRead = (notification) => { 
      //handles marking a notification as read or unread
+     const newReadStatus = !notification.read; //toggles the read status
     const updatedNotifications = {
         message: notification.message,
         read: !notification.read,  //toggles the read status
@@ -44,11 +45,21 @@ function Notification() {
     })
     .then((updatedNotification) => {
         setNotifications((prevNotifications) =>
-            prevNotifications.map((n) => (n.id === updatedNotification.id ? updatedNotification : n))
+            prevNotifications.map((notification) => 
+                (notification.id === updatedNotification.id 
+                    ? updatedNotification : notification))
         );
+
+        if (newReadStatus) {
+            onNotificationRead(-1); //notify parent component that a notification has been read
+        } else {
+            onNotificationRead(1); //notify parent component that a notification has been marked as unread
+        }
     })
     .catch((error) => console.error('Error updating notification:', error));
 };
+
+
      return (
         <div className="notification-container">
             <h2>Notifications 🔔</h2>      
@@ -58,7 +69,7 @@ function Notification() {
                 <ul className="notification-list">
                     {notifications.map((notification) => (
                         <li key={notification.id} className={`notification-item ${notification.read ? 'read' : 'unread'}`}
-                            onClick={() => handleToggleRead(notification)}>
+                            onClick={() => handleToggleRead(notification)}>  {/*marks notification as read/unread when clicked */}
                             <div className="notification-icon">
                                 {notification.read ? '✅' : '🔔'}
                             </div>
