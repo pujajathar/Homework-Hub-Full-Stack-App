@@ -18,7 +18,16 @@ function ParentsPage ({ assignments, toggleComplete, completedAssignments, setUs
     const completed = completedAssignments.length;   //calculates assignment statistics
     const pending = assignments.length - completed;
     const progressPct = assignments.length > 0 ? Math.round(( completed / assignments.length) * 100 ) : 0; //completion pct for progress bar
-    const unread = mockMessages.filter(m => !m.read).length; //counts unread teacher messages
+    const [unread, setUnread] = useState(0); //tracks number of unread notifications
+    useEffect(() => {  //fetches unread notifications from backend
+        fetch('http://localhost:8080/notifications/unread')  //fetches unread notifications from backend
+        .then((response) => {
+            console.log("Response status:", response.status);
+            return response.json();
+        })
+        .then((data) =>  setUnread(data))
+        .catch((error) => { console.error("Error fetching unread notifications:", error); });
+    }, []);
     const handleLogout = () => {  //logs the user out and return to homepage.
         setUser(null);
         navigate("/");
