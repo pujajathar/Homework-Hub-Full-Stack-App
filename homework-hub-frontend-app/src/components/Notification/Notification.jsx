@@ -59,6 +59,20 @@ function Notification({ onNotificationRead, recipient}) {
     .catch((error) => console.error('Error updating notification:', error));
 };
 
+const handleDeleteNotification = (notificationId) => {
+    fetch(`http://localhost:8080/notifications/${notificationId}`, {
+        method: 'DELETE'
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Failed to delete notification');
+        }
+        setNotifications((prevNotifications) =>
+            prevNotifications.filter((notification) => notification.id !== notificationId)
+        );
+    })
+    .catch((error) => console.error('Error deleting notification:', error));
+};
 
      return (
         <div className="notification-container">
@@ -80,6 +94,13 @@ function Notification({ onNotificationRead, recipient}) {
                             {!notification.read && (
                                 <span className="unread-label">New</span>
                             )}
+                            <button className="delete-notification"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteNotification(notification.id);
+                            }}>
+                                🗑️
+                            </button>
                         </li>
                     ))}
                 </ul>
