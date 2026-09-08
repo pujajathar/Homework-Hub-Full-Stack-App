@@ -5,6 +5,7 @@ import AssignmentList from "../AssignmentList/AssignmentList";
 import { mockAssignments, mockStudent, mockBadges, mockTeacher, mockStudents } from "../mockData";
 import ParentsPage from "../ParentsPage/ParentsPage";
 import { useState } from "react";
+import Notification from "../Notification/Notification";
 
 function StudentsPage ({ assignments, toggleComplete, completedAssignments, setUser}) {
  const [assignment, setAssignment] = useState(mockAssignments);
@@ -44,6 +45,8 @@ function StudentsPage ({ assignments, toggleComplete, completedAssignments, setU
                     <div className="stat-label">Points ⭐</div>
                 </div>
             </section>
+
+            <Notification />  {/* Notification component displays notifications from backend */}
             <div className="two-col">
                 <section className="card"> {/* Homework assignment list */}
                     <h2>📚🎯 My Homework</h2>

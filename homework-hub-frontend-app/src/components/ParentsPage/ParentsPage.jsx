@@ -5,6 +5,7 @@ import { mockMessages, mockAssignments, mockParent } from "../mockData";
 import './ParentsPage.css';
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
+import Notification from "../Notification/Notification";
 
 function ParentsPage ({ assignments, toggleComplete, completedAssignments, setUser }) {
   
@@ -76,6 +77,7 @@ return (
                 <div className="stat-label">Unread Messages</div>
             </div>
             </section>
+                <Notification />  {/* Notification component displays notifications from backend */}
 
             <div className="two-col">     {/* Main dashboard content */} 
             <section className="card">
