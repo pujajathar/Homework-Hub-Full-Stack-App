@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './components/HomePage/HomePage';
 import AboutPage from './components/AboutPage/AboutPage';
@@ -7,7 +7,7 @@ import AssignmentList from './components/AssignmentList/AssignmentList';
 import ParentsPage from './components/ParentsPage/ParentsPage';
 import TeachersPage from './components/TeachersPage/TeachersPage';
 import StudentsPage from './components/StudentsPage/StudentsPage';
-import { mockAssignments, mockStudents, mockBadges, mockMessages } from './components/mockData';
+import { mockStudents, mockBadges, mockMessages } from './components/mockData';
 import AssignmentForm from './components/AssignmentForm/AssignmentForm';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -26,8 +26,14 @@ function ProtectedRoute  ({allowedRole, children, user, setUser}) {  //checks wh
   };
 function App() {
   const [user, setUser] = useState(null);
-  const [assignments, setAssignments] = useState(mockAssignments);
-  const [completedAssignments, setCompletedAssignments] = useState([]);
+  const [assignments, setAssignments] = useState([]);  //stores assignments fetched from backend
+  const [completedAssignments, setCompletedAssignments] = useState([]);  //stores completed assignments
+  useEffect(() => {  //fetches assignments from backend when component mounts
+    fetch('http://localhost:8080/assignments')
+      .then((response) => response.json())
+      .then((data) => setAssignments(data))
+      .catch((error) => console.error('Error fetching assignments:', error));
+  }, []);
   
   const toggleComplete = (id) => { //handles marking an assignment as complete or incomplete
       setCompletedAssignments((prev) => {

@@ -4,7 +4,8 @@ import './StudentsPage.css';
 import AssignmentList from "../AssignmentList/AssignmentList";
 import { mockAssignments, mockStudent, mockBadges, mockTeacher, mockStudents } from "../mockData";
 import ParentsPage from "../ParentsPage/ParentsPage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Notification from "../Notification/Notification";
 
 function StudentsPage ({ assignments, toggleComplete, completedAssignments, setUser}) {
  const [assignment, setAssignment] = useState(mockAssignments);
@@ -12,7 +13,20 @@ function StudentsPage ({ assignments, toggleComplete, completedAssignments, setU
  const total = assignments.length;
  const progressPct = (assignments.length > 0) ? Math.round((completed / assignments.length) * 100) : 0;
  const earnedCount = mockBadges.filter(b => b.earned).length;
+ const [unread, setUnread] = useState(0); //tracks number of unread notifications
+ useEffect(() => {  //fetches unread notifications from backend
+    fetch('http://localhost:8080/notifications/student/unread')  //fetches unread notifications from backend
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        setUnread(data); //set the unread count based on the fetched data
+    })
+    .catch((error) => console.error('Error fetching unread notifications:', error));
+}, []);
+
  const navigate = useNavigate();
+
    const handleLogout = () => {
         setUser(null);
         navigate("/");
@@ -39,11 +53,19 @@ function StudentsPage ({ assignments, toggleComplete, completedAssignments, setU
                     <div className="stat-num amber">{total - completed}</div>
                     <div className="stat-label">Pending 📌</div>
                 </div>
+                 <div className="stat-card">
+                <div className="stat-num red">{unread}</div>
+                <div className="stat-label">Unread Messages</div>
+            </div>
                 <div className="stat-card">
                     <div className="stat-num purple">{mockStudent.points}</div>
                     <div className="stat-label">Points ⭐</div>
                 </div>
             </section>
+
+            <Notification 
+            recipient="student"
+            onNotificationRead={(change) => setUnread((prev) => Math.max(0, prev + change))} />  {/* Notification component displays notifications from backend */}
             <div className="two-col">
                 <section className="card"> {/* Homework assignment list */}
                     <h2>📚🎯 My Homework</h2>
