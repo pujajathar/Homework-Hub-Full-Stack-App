@@ -16,7 +16,7 @@ public class Notification {
     private Long id;
 
     private String message;
-    private Boolean isRead;
+    private boolean isRead;
     private LocalDate createdAt;
 
     public Notification() {
@@ -38,11 +38,11 @@ public class Notification {
         this.message = message;
     }
 
-    public Boolean getRead() {
+    public boolean getRead() {
         return isRead;
     }
 
-    public void setRead(Boolean read) {
+    public void setRead(boolean read) {
         isRead = read;
     }
 

@@ -22,10 +22,16 @@ public class NotificationController {
         return notificationRepository.findAll();
     }
 
+    @GetMapping("/unread")
+    public long getUnreadNotifications() {
+        return notificationRepository.countByIsReadFalse();
+    }
+
     @GetMapping("/{id}")
     public Notification getNotificationById(@PathVariable Long id) {
         return notificationRepository.findById(id).orElse(null);
     }
+
 
     @PostMapping
     public Notification createNotification(@RequestBody Notification notification) {
