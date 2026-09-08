@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { mockAssignments } from "../mockData";
 import "./AssignmentForm.css";
 
 
@@ -7,7 +6,8 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
 
     const [assignment, setAssignment] = useState({
             category: editAssignment?.category || "", // ?. is optional chaining, it prevent error if editAssignment doesn't exists
-            title: editAssignment?.title || "",    // means use the existing category if an assignment is being edited, otherwise use an empty string ""
+            title: editAssignment?.title || "", 
+            description: editAssignment?.description || "", // means use the existing category if an assignment is being edited, otherwise use an empty string ""
             dueDate: editAssignment?.dueDate || "",
             status: editAssignment?.status || "pending"  // default status is pending if not provided
     });
@@ -19,6 +19,7 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
             setAssignment({
                 category:"",
                 title: "",
+                description: "",
                 dueDate: "",
                 status:"pending"
             });
@@ -34,22 +35,13 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-       
-         const updateAssignment = {
-        ...assignment,
-     //if editAssignment exists then use it's existing id otherwise create new id using Date.now()
-    };
-    if (editAssignment) {
-        updateAssignment.id = editAssignment.id; //preserves the existing id when editing
-    }
-    onSubmit(updateAssignment);  //sends completed form data back to TeacherPage(parent component)
-  
-        setAssignment({
-            category:"",
-            title:"",
-            dueDate:"",
-            status:""
-        });
+        const assignmentToSave = {
+            ...assignment
+        };
+        if(editAssignment) {  //if assignment is being edited then include the id of the assignment to be updated
+            assignmentToSave.id = editAssignment.id;
+        }
+        onSubmit(assignmentToSave);  //calls the onSubmit function passed from TeachersPage component
     };
    
     return (
@@ -90,7 +82,17 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                     required
                     />
                 </label>
-                <label>dueDate:
+                <label>Description:
+                    <textarea 
+                    name="description"
+                    value={assignment.description}
+                    onChange={handleChange}
+                    placeholder="Description of Assignment..."
+                    rows={4}
+                    required
+                    />
+                </label>
+                <label>Due Date:
                     <input type="date"
                     name="dueDate"
                     value={assignment.dueDate}

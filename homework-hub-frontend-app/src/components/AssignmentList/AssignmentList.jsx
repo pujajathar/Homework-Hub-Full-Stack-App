@@ -27,6 +27,9 @@ function AssignmentList ({
                         <h3 className={completedAssignments.includes(assignment.id) ? "completed" : ''}> {/* adds CSS class conditionaly used for text decoration line through */}
                             {assignment.title}
                         </h3>
+                        <p className="description">
+                            {assignment.description}
+                        </p>
                         <p className="due">
                             Due on : {assignment.dueDate}
                         </p>
@@ -36,18 +39,27 @@ function AssignmentList ({
                             <span className={`tag ${assignment.category?.toLowerCase()}`}>
                                 {assignment.category}
                             </span>
-                        {showActions && ( //only display buttons if showActions is true
-                            <div className='buttonspace'>
-                            <button className='edit-btn'
-                            onClick={() => onEdit(assignment.id)}>
-                                Edit
-                            </button>
-                            <button className='delete-btn'
-                            onClick={() => handleDelete(assignment.id)}>
-                                Delete
-                            </button>
-                            </div>
-                        )}
+                       {showActions && (
+    <div className="buttonspace">
+
+        <button
+            type="button"
+            className="edit-btn"
+            onClick={() => onEdit(assignment.id)}
+        >
+            Edit
+        </button>
+
+        <button
+            type="button"
+            className="delete-btn"
+            onClick={() => handleDelete(assignment.id)}
+        >
+            Delete
+        </button>
+
+    </div>
+)}
                         </div>
                 </div>  
             ))}

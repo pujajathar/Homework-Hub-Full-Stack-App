@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { mockAssignments, mockStudents } from "../mockData";
 import AssignmentForm from "../AssignmentForm/AssignmentForm";
@@ -8,10 +8,10 @@ import Button from "../Button/Button";
 import teacher from "../../assets/images/teacher.png";
 import './TeachersPage.css';
 import AssignmentList from "../AssignmentList/AssignmentList";
-import { createAssignment } from "../Api/AssignmentApi.js";
+import {getAssignments, createAssignment, updateAssignment, deleteAssignment } from "../Api/AssignmentApi.js";
 import Header from "../Header/Header";
 
-function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } ) {
+function TeachersPage ( { assignments, setAssignments, setUser } ) {
 
     const parents = [   //mock parent data used to display parent messages
     {id: 1, name: "Sarah Johnson", child: "Emma Johnson",lastMsgDate: "2026-07-06"},
@@ -24,25 +24,50 @@ function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } )
     const [replyId, setReplyId] = useState(null); //stores which parent reply section is open
     const [replyText, setReplyText] = useState(""); //stores reply message text
     const [replySent, setReplySent] = useState(false); //controls reply success message display
+
+    useEffect(() => {
+    getAssignments()
+        .then(data => {
+            setAssignments(data);
+        })
+        .catch(error => {
+            console.error("Error fetching assignments:", error);
+        });
+    }, []);
+
     const navigate = useNavigate();
-   const handleLogout = () => {
+
+    const handleLogout = () => {
         setUser(null);
         navigate("/");
     } 
-    const handleEdit = (id) => {  /* opens form to edit/modify assignmet */
-        const assignment = assignments.find((item) => item.id === id);
-        setEditAssignments(assignment); //stores assignment data & opens form
-        setShowForm(true);
+const handleEdit = (id) => {
+    const assignment = assignments.find((item) => item.id === id);
+    setEditAssignments(assignment);
+    setShowForm(true);
+};
+    const handleDelete = async (id) => {
+        try {
+            await deleteAssignment(id); 
+            setAssignments((prev) => prev.filter((assignment) => assignment.id !== id)); //creates new array with every assignment except whose id matches 
+        } catch (error) {
+            console.error("Error deleting assignment:", error);
+        }
     };
    const handleAddAssignment = async(newAssignment) => { //handles adding new assignment
         try {
-            const savedAssignment = await createAssignment(newAssignment);
-            setAssignments(prev => [...prev, savedAssignment]);
-
-            setEditAssignments(null); //clears edit mode after assignment is added
-            setShowForm(false); //closes form after assignment is added
+            if (editAssignments) {  //if assignment is being edited then update it
+                const updatedAssignment = await updateAssignment(editAssignments.id, newAssignment);
+                setAssignments(prev => 
+                    prev.map(assignment => assignment.id === updatedAssignment.id ? updatedAssignment : assignment));
+            } else {  //if not then create new assignment
+                const savedAssignment = await createAssignment(newAssignment);
+                setAssignments(prev => [...prev, savedAssignment]);
+            }
+            setEditAssignments(null); //clears edit mode after saving
+            setShowForm(false); //closes form after saving
         } catch (error) {
-            console.error("Error creating assignment:", error);
+            console.error("Error saving assignment:", error);
         }
     };   
     const handleReply = (e) => {  //reply to parents
@@ -54,7 +79,9 @@ function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } )
             setReplyId(null); 
         }, 2000); //hides success msg after 2 seconds
     }
-    return (      
+    return (  
+       <>
+      
     <div className="home">  
        <div className="page">
         <header className="dashboard-header">          
@@ -92,7 +119,7 @@ function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } )
          <div className="two-col">
                <div className="card">
                     <div className="card-header">
-                <h2 style={ {'font-size':"25px"}}>📝 Assignments 📝</h2> 
+                <h2 style={ {fontSize:"25px"}}>📝 Assignments 📝</h2> 
                     <button
                     className="btn btn-green" variant="green"
                     onClick={() => {   //cleares edit mode when creating new assignment
@@ -107,7 +134,7 @@ function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } )
             <AssignmentForm 
             assignment={editAssignments}
             onSubmit={handleAddAssignment}
-            onCancel={() => setShowForm(false)}         
+            onCancel={() => {setShowForm(false); setEditAssignments(null);}}         
             />
             )
             }        
@@ -188,7 +215,8 @@ function TeachersPage ( { handleDelete, assignments, setAssignments, setUser } )
           </div>
         </div>
     </div>
-</div>     
+</div>  
+ </>   
 );  
 };
 export default TeachersPage;    

@@ -21,6 +21,13 @@
     min-width: 0;
     flex: 1;
 }
+
+.description {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #555;
+}
+
 .assignment-left > div { min-width: 0;}
 .assignment-left h3 { overflow-wrap: anywhere; word-break: break-word;}
 .assignment-right{
@@ -98,3 +105,4 @@
     .edit-btn, .delete-btn { font-size: 12px; padding: 8px 12px;}
     .check-btn { font-size: 1rem;}
 }
+

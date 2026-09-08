@@ -14,12 +14,7 @@ import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
 import './App.css';
 
-
-function App() {
-  const [user, setUser] = useState(null);
-  const [assignments, setAssignments] = useState(mockAssignments);
-  const [completedAssignments, setCompletedAssignments] = useState([]);
-  const ProtectedRoute = ({allowedRole, children}) => {  //checks whether the user is allowed to access page
+function ProtectedRoute  ({allowedRole, children, user, setUser}) {  //checks whether the user is allowed to access page
     if(!user || user.role !== allowedRole) {
       return ( <Login       
         role={allowedRole}
@@ -29,6 +24,11 @@ function App() {
     }
     return children;
   };
+function App() {
+  const [user, setUser] = useState(null);
+  const [assignments, setAssignments] = useState(mockAssignments);
+  const [completedAssignments, setCompletedAssignments] = useState([]);
+  
   const toggleComplete = (id) => { //handles marking an assignment as complete or incomplete
       setCompletedAssignments((prev) => {
         if(prev.includes(id)) {
@@ -36,11 +36,7 @@ function App() {
         }
         return [...prev, id];
     });
-  };
-  const handleDelete = (id) => {    /* deletes assignment */ 
-    setAssignments((prev) => prev.filter((assignment) => assignment.id !== id)); //creates new array with every assignment except whose id matches 
-    };                                                                           //with id passed in and remove that assignment 
-
+  }
  return (
   <div className='app'>
     <Header user={user} setUser={setUser} />
@@ -49,7 +45,9 @@ function App() {
     <Route path='/' element={<HomePage setUser={setUser} />} />
     <Route path='/aboutus' element={<AboutPage />} />
     <Route path='/parents' element={
-    <ProtectedRoute allowedRole="parent">
+    <ProtectedRoute allowedRole="parent"
+    user={user}
+    setUser={setUser}>
     <ParentsPage 
     setUser={setUser}
     assignments={assignments} 
@@ -59,18 +57,24 @@ function App() {
     />
     </ProtectedRoute>
    } />
-    <Route path='/teachers' element={
-    <ProtectedRoute allowedRole="teacher">
-    <TeachersPage 
+   <Route path='/teachers' element={
+  <ProtectedRoute
+    allowedRole="teacher"
+    user={user}
     setUser={setUser}
-    assignments={assignments}
-    setAssignments={setAssignments}
-    handleDelete={handleDelete}
-   />
-   </ProtectedRoute>
-  } /> 
+  >
+    <TeachersPage 
+      setUser={setUser}
+      assignments={assignments}
+      setAssignments={setAssignments}
+    />
+  </ProtectedRoute>
+} />
     <Route path='/students' element={
-    <ProtectedRoute allowedRole="student">
+    <ProtectedRoute allowedRole="student"
+    user={user}
+    setUser={setUser}
+    >
     <StudentsPage 
     setUser={setUser}
     assignments={assignments}
