@@ -3,6 +3,7 @@ import './Notification.css';
 function Notification() {
     const [notifications, setNotifications] = useState([]);
     useEffect(() => {
+        const fetchNotifications = () => {
     fetch('http://localhost:8080/notifications')  //fetches notifications from backend
         .then((response) => {
                         console.log("Response status:", response.status);
@@ -14,7 +15,12 @@ function Notification() {
             setNotifications(data);
         })
         .catch((error) => console.error('Error fetching notifications:', error));
-    }, []);
+    };
+
+    fetchNotifications(); //get notifications immediately
+    const interval = setInterval(fetchNotifications, 5000); //fetches notifications every 5 seconds
+    return () => clearInterval(interval); //clears interval when component unmounts
+}, []);
 
     const handleToggleRead = (notification) => { 
      //handles marking a notification as read or unread
@@ -51,13 +57,14 @@ function Notification() {
             ) : (   
                 <ul className="notification-list">
                     {notifications.map((notification) => (
-                        <li key={notification.id} className={`notification-item ${notification.read ? 'read' : 'unread'}`}>
+                        <li key={notification.id} className={`notification-item ${notification.read ? 'read' : 'unread'}`}
+                            onClick={() => handleToggleRead(notification)}>
                             <div className="notification-icon">
                                 {notification.read ? '✅' : '🔔'}
                             </div>
                             <div className="notification-content">
                                 <p className="notification-message">{notification.message}</p>
-                                <small className="notification-date">{notification.createdAt}</small>
+                                <small className="notification-date">Created on: {notification.createdAt}</small>
                             </div>
                             {!notification.read && (
                                 <span className="unread-label">New</span>
