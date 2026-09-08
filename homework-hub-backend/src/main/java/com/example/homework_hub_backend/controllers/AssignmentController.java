@@ -35,13 +35,22 @@ public class AssignmentController {
     @PostMapping
     public Assignment createAssignment(@RequestBody Assignment assignment) {
         Assignment savedAssignment = assignmentRepository.save(assignment);
-        // Create a notification for the new assignment
-        Notification notification = new Notification();
-        notification.setMessage("New assignment: " + savedAssignment.getTitle()
-        + "\nDue: " + savedAssignment.getDueDate().format(java.time.format.DateTimeFormatter.ofPattern("MMM dd, yyyy")));
-        notification.setRead(false);
-        notification.setCreatedAt(LocalDate.now());
-        notificationRepository.save(notification); // Save the notification
+       String message = "New assignment created: " + savedAssignment.getTitle() + " (Due: " + savedAssignment.getDueDate() + ")";
+       //notification for parents
+        Notification parentNotification = new Notification();
+        parentNotification.setMessage(message);
+        parentNotification.setRead(false);
+        parentNotification.setCreatedAt(LocalDate.now());
+        parentNotification.setRecipient("parent"); // Set recipient to parent
+        notificationRepository.save(parentNotification);
+
+        //notification for students
+        Notification studentNotification = new Notification();
+        studentNotification.setMessage(message);
+        studentNotification.setRead(false);
+        studentNotification.setCreatedAt(LocalDate.now());
+        studentNotification.setRecipient("student"); // Set recipient to student
+        notificationRepository.save(studentNotification);
         return savedAssignment;
     }
 

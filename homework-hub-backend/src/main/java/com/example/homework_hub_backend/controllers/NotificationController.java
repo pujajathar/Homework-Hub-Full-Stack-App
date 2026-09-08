@@ -31,7 +31,23 @@ public class NotificationController {
     public Notification getNotificationById(@PathVariable Long id) {
         return notificationRepository.findById(id).orElse(null);
     }
+    @GetMapping("/parent")
+    public List<Notification> getNotificationsByParent() {
+            return notificationRepository.findByRecipient("parent");
+    }
+    @GetMapping("/parent/unread")
+    public long getUnreadNotificationsByParent() {
+        return notificationRepository.countByRecipientAndIsReadFalse("parent");
+    }
 
+    @GetMapping("/student")
+    public List<Notification> getNotificationsByStudent() {
+        return notificationRepository.findByRecipient("student");
+    }
+    @GetMapping("/student/unread")
+    public long getUnreadNotificationsByStudent() {
+        return notificationRepository.countByRecipientAndIsReadFalse("student");
+    }
 
     @PostMapping
     public Notification createNotification(@RequestBody Notification notification) {

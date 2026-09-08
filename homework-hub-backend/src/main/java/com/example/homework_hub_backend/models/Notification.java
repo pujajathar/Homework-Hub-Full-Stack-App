@@ -6,7 +6,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 public class Notification {
@@ -18,6 +17,7 @@ public class Notification {
     private String message;
     private boolean isRead;
     private LocalDate createdAt;
+    private String recipient; // New field for recipient
 
     public Notification() {
     }
@@ -52,5 +52,13 @@ public class Notification {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(String recipient) {
+        this.recipient = recipient;
     }
 }
