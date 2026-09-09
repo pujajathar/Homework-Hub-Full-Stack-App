@@ -6,6 +6,7 @@ import './ParentsPage.css';
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import Notification from "../Notification/Notification";
+import AssignmentCalendar from "../AssignmentCalendar/AssignmentCalendar";
 
 function ParentsPage ({ assignments, toggleComplete, completedAssignments, setUser }) {
   
@@ -83,7 +84,7 @@ return (
             </div>
             <div className="stat-card">
                 <div className="stat-num red">{unread}</div>
-                <div className="stat-label">Unread Messages</div>
+                <div className="stat-label">Unread Notifications</div>
             </div>
             </section>
                 <Notification 
@@ -115,7 +116,7 @@ return (
                 </section>
 
                 <section className="card">
-                <h2>💬 Messages from Teachers</h2>
+                <h2>Messages from Teachers: </h2>
                 <ul className="message-list">
                     {mockMessages.map(m => (
                         <li key={m.id} className={`message-item ${m.read ? "" : "unread"}`}>
@@ -128,6 +129,10 @@ return (
                         </li>             
                     ))}
                 </ul>
+            </section>
+            <section className="card">
+                <h2>Assignment Calendar 📅</h2>
+                <AssignmentCalendar assignments={assignments} />  {/* Assignment calendar component displays assignments in a calendar view */}
             </section>
 
            <section className="card">  {/* contact form allow parents to send message to teachers */}

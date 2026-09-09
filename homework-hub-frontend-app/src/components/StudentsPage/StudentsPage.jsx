@@ -6,6 +6,7 @@ import { mockAssignments, mockStudent, mockBadges, mockTeacher, mockStudents } f
 import ParentsPage from "../ParentsPage/ParentsPage";
 import { useState, useEffect } from "react";
 import Notification from "../Notification/Notification";
+import AssignmentCalendar from "../AssignmentCalendar/AssignmentCalendar";
 
 function StudentsPage ({ assignments, toggleComplete, completedAssignments, setUser}) {
  const [assignment, setAssignment] = useState(mockAssignments);
@@ -99,6 +100,10 @@ function StudentsPage ({ assignments, toggleComplete, completedAssignments, setU
                             ))}
                         </div>
                         < p className="badge-hint">Keep working on your assignments to unlock more badges! </p>
+                    </section>
+                    <section className="card">
+                        <h2>Assignment Calendar 📅</h2>
+                        <AssignmentCalendar assignments={assignments} />  {/* Assignment calendar component displays assignments in a calendar view */}
                     </section>
                     <section className="card motivational">
                         <h2>🏆 You are doing great!</h2>
