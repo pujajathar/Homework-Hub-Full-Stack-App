@@ -9,6 +9,7 @@ import teacher from "../../assets/images/teacher.png";
 import './TeachersPage.css';
 import AssignmentList from "../AssignmentList/AssignmentList";
 import {getAssignments, createAssignment, updateAssignment, deleteAssignment } from "../Api/AssignmentApi.js";
+import AssignmentCalendar from "../AssignmentCalendar/AssignmentCalendar";
 import Header from "../Header/Header";
 
 function TeachersPage ( { assignments, setAssignments, setUser } ) {
@@ -111,6 +112,7 @@ const handleEdit = (id) => {
                 </div>
                 <div className="stat-label">Submissions</div>
             </div>
+          
             <div className="stat-card">
                 <div className="stat-num indigo">{parents.length}</div>
                 <div className="stat-label">Parents Messages</div>
@@ -211,6 +213,10 @@ const handleEdit = (id) => {
                         </li>
                     ))}
                 </ul>
+            </section>
+            <section className="card">
+                <h2>Assignment Calendar 📅</h2>
+                <AssignmentCalendar assignments={assignments} />  {/* Assignment calendar component displays assignments in a calendar view */}
             </section>
           </div>
         </div>
