@@ -119,19 +119,19 @@ const handleEdit = (id) => {
             </div>
         </section>    
          <div className="two-col">
-               <div className="card">
-                    <div className="card-header">
-                <h2 style={ {fontSize:"25px"}}>📝 Assignments 📝</h2> 
-                    <button
-                    className="btn btn-green" variant="green"
-                    onClick={() => {   //cleares edit mode when creating new assignment
-                        setEditAssignments(null);
-                        setShowForm(true);
-                    }}
-                    >
-                + Create New
-                </button>
-                  </div>
+            <div className="card">
+                <div className="card-header">
+                    <h2 style={ {fontSize:"25px"}}>📝 Assignments 📝</h2> 
+                        <button
+                            className="btn btn-green" variant="green"
+                            onClick={() => {   //cleares edit mode when creating new assignment
+                            setEditAssignments(null);
+                            setShowForm(true);
+                            }}
+                            >
+                                + Create New
+                        </button>
+                </div>
                   {showForm && (  
             <AssignmentForm 
             assignment={editAssignments}
@@ -146,7 +146,7 @@ const handleEdit = (id) => {
             handleDelete={handleDelete}
             onEdit={handleEdit}
             />
-         </div>   
+        </div>   
           <div>
             <section className="card">
                 <h2>Student Progress</h2>
