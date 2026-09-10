@@ -115,7 +115,7 @@ return (
                             <p className="progress-note">{completed} of {assignments.length} assignments completed this week.</p>
                 </section>
 
-                <section className="card">
+                {/* <section className="card">
                 <h2>Messages from Teachers: </h2>
                 <ul className="message-list">
                     {mockMessages.map(m => (
@@ -129,7 +129,7 @@ return (
                         </li>             
                     ))}
                 </ul>
-            </section>
+            </section> */}
             <section className="card">
                 <h2>Assignment Calendar 📅</h2>
                 <AssignmentCalendar assignments={assignments} />  {/* Assignment calendar component displays assignments in a calendar view */}
