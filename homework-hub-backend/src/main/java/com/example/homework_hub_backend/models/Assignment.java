@@ -1,11 +1,10 @@
 package com.example.homework_hub_backend.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Assignment {
@@ -19,8 +18,12 @@ public class Assignment {
     private String category; // New field for category
     private String status;
 
+    @OneToMany(mappedBy = "assignment") //one assignment can have many notifications
+    private List<Notification> notifications = new ArrayList<>();
+
     public Assignment() {
     }
+
 
     // Getters and setters
     public Long getId() {
@@ -65,5 +68,13 @@ public class Assignment {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }

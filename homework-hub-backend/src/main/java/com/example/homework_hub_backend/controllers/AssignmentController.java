@@ -42,6 +42,7 @@ public class AssignmentController {
         parentNotification.setRead(false);
         parentNotification.setCreatedAt(LocalDate.now());
         parentNotification.setRecipient("parent"); // Set recipient to parent
+        parentNotification.setAssignment(savedAssignment);
         notificationRepository.save(parentNotification);
 
         //notification for students
@@ -49,7 +50,8 @@ public class AssignmentController {
         studentNotification.setMessage(message);
         studentNotification.setRead(false);
         studentNotification.setCreatedAt(LocalDate.now());
-        studentNotification.setRecipient("student"); // Set recipient to student
+        studentNotification.setRecipient("student");// Set recipient to student
+        studentNotification.setAssignment(savedAssignment);
         notificationRepository.save(studentNotification);
         return savedAssignment;
     }
