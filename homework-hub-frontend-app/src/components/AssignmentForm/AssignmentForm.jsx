@@ -43,13 +43,15 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const assignmentToSave = {
-            ...assignment
+        const assignmentToSave = { //Include the selected file with assignment data
+            ...assignment,
+            file: file
         };
         if(editAssignment) {  //if assignment is being edited then include the id of the assignment to be updated
             assignmentToSave.id = editAssignment.id;
         }
         onSubmit(assignmentToSave);  //calls the onSubmit function passed from TeachersPage component
+                                    // Send assignment and selected file to teacherpage
     };
    
     return (
