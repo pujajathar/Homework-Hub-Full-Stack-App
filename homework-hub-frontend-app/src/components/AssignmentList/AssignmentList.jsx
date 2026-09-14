@@ -33,6 +33,22 @@ function AssignmentList ({
                         <p className="due">
                             Due on : {assignment.dueDate}
                         </p>
+
+                        {/* Displays attachments when an assignment has files */}
+                        {assignment.attachments?.length > 0 && (
+                            <div className='attachments'>
+                                <strong>Attachment:</strong>
+                                {assignment.attachments.map((attachment) => (
+                                    <a 
+                                    href={`http://localhost:8080/attachments/${attachment.id}`}
+                                    download
+                                    >
+                                    📎{attachment.fileName}
+                                    </a>
+                                ))}
+
+                            </div>
+                        )}
                     </div>
                     </div>
                         <div className="assignment-right">  {/*right side */}
@@ -40,27 +56,27 @@ function AssignmentList ({
                                 {assignment.category}
                             </span>
                        {showActions && (
-    <div className="buttonspace">
+                            <div className="buttonspace">
 
-        <button
-            type="button"
-            className="edit-btn"
-            onClick={() => onEdit(assignment.id)}
-        >
-            Edit
-        </button>
+                                <button
+                                    type="button"
+                                    className="edit-btn"
+                                    onClick={() => onEdit(assignment.id)}
+                                >
+                                    Edit
+                                </button>
 
-        <button
-            type="button"
-            className="delete-btn"
-            onClick={() => handleDelete(assignment.id)}
-        >
-            Delete
-        </button>
+                                <button
+                                    type="button"
+                                    className="delete-btn"
+                                    onClick={() => handleDelete(assignment.id)}
+                                >
+                                    Delete
+                                </button>
 
-    </div>
-)}
-                        </div>
+                            </div>
+                        )}
+                         </div>
                 </div>  
             ))}
         </div> 
