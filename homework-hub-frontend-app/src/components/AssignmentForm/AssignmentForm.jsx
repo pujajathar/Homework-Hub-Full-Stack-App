@@ -11,6 +11,9 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
             dueDate: editAssignment?.dueDate || "",
             status: editAssignment?.status || "pending"  // default status is pending if not provided
     });
+
+    const [file, setFile] = useState(null); //Stores the selected attachment file
+
     const isEditing = Boolean(editAssignment); //checks if assignment is being edited
     useEffect (() => {      
         if (editAssignment) {  // if user clicks edit on existing assignment then form is filled with it's data
@@ -33,6 +36,11 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                 [name]:value
             });
     }
+
+    const handleFileChange = (e) => { // Stores file selected by user
+        setFile(e.target.files[0]);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const assignmentToSave = {
@@ -99,6 +107,10 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                     onChange={handleChange}
                     required
                     />
+                </label>
+                <label>Attachment:
+                    <input type="file"
+                    onChange={handleFileChange} />
                 </label>
             <div className="button-group">  
                 <button className="submit-btn" type="submit">      {/* button text changes depending on editing or creating */}
