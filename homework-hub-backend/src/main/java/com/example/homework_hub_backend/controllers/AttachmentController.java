@@ -4,11 +4,15 @@ import com.example.homework_hub_backend.models.Assignment;
 import com.example.homework_hub_backend.models.Attachment;
 import com.example.homework_hub_backend.repositories.AssignmentRepository;
 import com.example.homework_hub_backend.repositories.AttachmentRepository;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -61,6 +65,24 @@ public class AttachmentController {
         } catch (IOException e) {
             return ResponseEntity.internalServerError().body("File upload failed.");
         }
+    }
+
+    @GetMapping("/{id}") // Attachment retrive/Download endpoint
+    public ResponseEntity<Resource> downloadFile(@PathVariable Long id) throws MalformedURLException {
+
+        Attachment attachment = attachmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Attachment not found."));
+
+        Path filePath = Paths.get(attachment.getFilePath());
+        UrlResource resource = new UrlResource(filePath.toUri());
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + attachment.getFileName() + "\"")
+                .header(
+                        HttpHeaders.CONTENT_TYPE,
+                        attachment.getFileType()
+                ).body(resource);
     }
 
 }
