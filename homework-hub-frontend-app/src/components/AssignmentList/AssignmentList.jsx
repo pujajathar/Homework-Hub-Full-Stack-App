@@ -13,7 +13,7 @@ function AssignmentList ({
     return (
         <div className="assignment-list">
                             {/*display assignment*/ }
-            {assignments.map((assignment) => (
+            {Array.isArray(assignments) && assignments.map((assignment) => (
                 <div key={assignment.id} className="assignment-row"> {/* creates one row for each assignment */}
                     <div className="assignment-left"> {/*left side */}
                         {toggleComplete && (  //only show this button if togglecomplete exists
