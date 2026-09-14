@@ -1,9 +1,6 @@
 package com.example.homework_hub_backend.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -18,6 +15,10 @@ public class Notification {
     private boolean isRead;
     private LocalDate createdAt;
     private String recipient; // New field for recipient
+
+    @ManyToOne
+    @JoinColumn(name = "assignment-id")
+    private Assignment assignment;
 
     public Notification() {
     }
@@ -60,5 +61,13 @@ public class Notification {
 
     public void setRecipient(String recipient) {
         this.recipient = recipient;
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
     }
 }
