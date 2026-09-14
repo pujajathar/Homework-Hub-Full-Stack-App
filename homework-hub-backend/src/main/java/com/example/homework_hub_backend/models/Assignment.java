@@ -1,7 +1,6 @@
 package com.example.homework_hub_backend.models;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +19,10 @@ public class Assignment {
 
     @OneToMany(mappedBy = "assignment") //one assignment can have many notifications
     private List<Notification> notifications = new ArrayList<>();
+
+    //one assignment can have multiple attachments
+    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Attachment> attachments = new ArrayList<>();
 
     public Assignment() {
     }
@@ -76,5 +79,13 @@ public class Assignment {
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 }
