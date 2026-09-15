@@ -1,5 +1,6 @@
 package com.example.homework_hub_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,9 @@ public class Attachment {
     private String fileType;
     private String filePath;
 
+    //links the attachment back to its assignment
+    //JsonIgnore prevents an infinite JSON loop
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "assignment_id")
     private Assignment assignment;
