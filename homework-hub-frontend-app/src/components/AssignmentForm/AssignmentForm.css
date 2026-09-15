@@ -67,6 +67,35 @@
     font-size: 14px;
     margin-top: 4px;
 }
+
+.existing-attachment {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0 12px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+}
+
+.existing-attachment span {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+    overflow-wrap: anywhere;
+}
+.existing-attachment a:first-of-type {
+    color: #2563eb;
+}
+.existing-attachment a:first-of-type:hover {
+    background-color: #f0bbdf;
+}
+.existing-attachment a:last-of-type{
+    color: #15803d;
+}
+.existing-attachment a:last-of-type:hover {
+    background-color: #aaee88;
+}
 /* Media query for Tablets */
 @media (max-width: 900px) {
     .assignment-form-container { width: 90%; padding: 1.5rem;}
