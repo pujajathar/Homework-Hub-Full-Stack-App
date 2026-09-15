@@ -14,6 +14,8 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
 
     const [file, setFile] = useState(null); //Stores the selected attachment file
 
+    const [errors, setErrors] = useState({}); //stores validation error messages for each form field
+
     const isEditing = Boolean(editAssignment); //checks if assignment is being edited
     useEffect (() => {      
         if (editAssignment) {  // if user clicks edit on existing assignment then form is filled with it's data
@@ -27,6 +29,7 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                 status:"pending"
             });
         }
+        setErrors({}); //clears previous validation errors when form changes.
     }, [editAssignment]);  //useEffect runs when editAssignment changes
     
     const handleChange = (e) => {    //updates assignment form when user types
@@ -35,14 +38,47 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                 ...assignment,
                 [name]:value
             });
-    }
+            setErrors ((previousErrors) => ({ //clears error message once user starts correcting value
+                ...previousErrors,
+                [name]: ""
+            }));
+    };
 
     const handleFileChange = (e) => { // Stores file selected by user
         setFile(e.target.files[0]);
     };
 
+    //Checks the required form fields before submitting.
+    const validateForm = () => {
+        const newErrors = {};
+        if(!assignment.category) {
+            newErrors.category = "Please select a category.";
+        }
+        if(!assignment.title.trim()) {
+            newErrors.title = "Title is required.";
+        }
+        if(!assignment.description.trim()) {
+            newErrors.description = "Description is required.";
+        }
+        if(!assignment.dueDate) {
+            newErrors.dueDate = "Due date is required.";
+        } else{
+            const today = new Date().toISOString().split("T")[0];
+            if(assignment.dueDate < today) {
+                newErrors.dueDate = "Due date can not be in the past."
+            }
+        }
+        setErrors(newErrors);  //Saves all validation errors in state.
+
+        return Object.keys(newErrors).length === 0; //Return true when there are no validation errors.
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if(!validateForm()) { //stop the form from submitting if validation fails
+            return;
+        }
         const assignmentToSave = { //Include the selected file with assignment data
             ...assignment,
             file: file
@@ -79,7 +115,11 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                    <option value="Art">Art</option>
                    <option value="English">English</option>
                    <option value="Social-Studies">Social-Studies</option>
-                </select>                
+                </select> 
+                {/*Displays category validation error */}
+                {errors.category && (
+                    <p className="form-error">{errors.category}</p>
+                )}               
                 </label>
                 )}
                
@@ -88,9 +128,12 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                     name="title"
                     value={assignment.title} 
                     onChange={handleChange}
-                    placeholder="Title of Assignment..."
-                    required
+                    placeholder="Title of Assignment..."                  
                     />
+                    {/* displays title validation error */}
+                    {errors.title && (
+                        <p className="form-error">{errors.title}</p>
+                    )}
                 </label>
                 <label>Description:
                     <textarea 
@@ -98,17 +141,24 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                     value={assignment.description}
                     onChange={handleChange}
                     placeholder="Description of Assignment..."
-                    rows={4}
-                    required
+                    rows={4}                  
                     />
+                    {/* displays description validation error */}
+                    {errors.description && (
+                        <p className="form-error">{errors.description}</p>
+                    )}
                 </label>
                 <label>Due Date:
                     <input type="date"
                     name="dueDate"
                     value={assignment.dueDate}
                     onChange={handleChange}
-                    required
+                    min={new Date().toISOString().split("T")[0]}
                     />
+                    {/* displays due date validation error */}
+                    {errors.dueDate && (
+                        <p className="form-error">{errors.dueDate}</p>
+                    )}
                 </label>
                 <label>Attachment:
                     <input type="file"
