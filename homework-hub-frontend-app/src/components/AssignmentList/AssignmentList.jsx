@@ -13,7 +13,7 @@ function AssignmentList ({
     return (
         <div className="assignment-list">
                             {/*display assignment*/ }
-            {assignments.map((assignment) => (
+            {Array.isArray(assignments) && assignments.map((assignment) => (
                 <div key={assignment.id} className="assignment-row"> {/* creates one row for each assignment */}
                     <div className="assignment-left"> {/*left side */}
                         {toggleComplete && (  //only show this button if togglecomplete exists
@@ -33,6 +33,38 @@ function AssignmentList ({
                         <p className="due">
                             Due on : {assignment.dueDate}
                         </p>
+
+                        {/* Displays attachments when an assignment has files
+                        and Display view & download options for attachment */}
+                        {assignment.attachments?.length > 0 && (
+                            <div className='attachments'>
+                                <strong>Attachment:</strong>
+
+                                {assignment.attachments.map((attachment) => (
+                                    <div key={attachment.id}>
+                                        <span>📎{attachment.fileName}</span>
+
+                                        {/* Opens attachment in new browser tab */}
+                                        <a 
+                                        href={`http://localhost:8080/attachments/${attachment.id}/view`}
+                                        target='_blank'
+                                        rel='noopener noreferrer'>
+                                            View
+                                        </a>
+
+                                        {/* Download the attachment */}
+                                        <a 
+                                        href={`http://localhost:8080/attachments/${attachment.id}`}
+                                        download>
+                                            Download
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                      
+                                   
+                                 
                     </div>
                     </div>
                         <div className="assignment-right">  {/*right side */}
@@ -40,27 +72,27 @@ function AssignmentList ({
                                 {assignment.category}
                             </span>
                        {showActions && (
-    <div className="buttonspace">
+                            <div className="buttonspace">
 
-        <button
-            type="button"
-            className="edit-btn"
-            onClick={() => onEdit(assignment.id)}
-        >
-            Edit
-        </button>
+                                <button
+                                    type="button"
+                                    className="edit-btn"
+                                    onClick={() => onEdit(assignment.id)}
+                                >
+                                    Edit
+                                </button>
 
-        <button
-            type="button"
-            className="delete-btn"
-            onClick={() => handleDelete(assignment.id)}
-        >
-            Delete
-        </button>
+                                <button
+                                    type="button"
+                                    className="delete-btn"
+                                    onClick={() => handleDelete(assignment.id)}
+                                >
+                                    Delete
+                                </button>
 
-    </div>
-)}
-                        </div>
+                            </div>
+                        )}
+                         </div>
                 </div>  
             ))}
         </div> 

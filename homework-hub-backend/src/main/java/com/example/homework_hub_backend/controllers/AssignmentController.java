@@ -72,6 +72,12 @@ public class AssignmentController {
     }
     @DeleteMapping("/{id}")
     public void deleteAssignment(@PathVariable Long id) {
+
+        //Delete notifications connected to the assignment first
+        notificationRepository.deleteAll(
+                notificationRepository.findByAssignmentId(id)
+        );
+        //Cascade will delete the assignment's attachment
         assignmentRepository.deleteById(id);
     }
 }

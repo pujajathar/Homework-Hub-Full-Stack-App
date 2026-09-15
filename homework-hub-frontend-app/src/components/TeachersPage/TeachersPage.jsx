@@ -57,13 +57,45 @@ const handleEdit = (id) => {
     };
    const handleAddAssignment = async(newAssignment) => { //handles adding new assignment
         try {
+            //get the selected file from the form
+            const file = newAssignment.file;
+
+            //remove the file before sending assignment data to the backend
+            const assignmentData = {...newAssignment};
+            delete assignmentData.file;
+
+            let savedAssignment;
+
             if (editAssignments) {  //if assignment is being edited then update it
-                const updatedAssignment = await updateAssignment(editAssignments.id, newAssignment);
-                setAssignments(prev => 
-                    prev.map(assignment => assignment.id === updatedAssignment.id ? updatedAssignment : assignment));
-            } else {  //if not then create new assignment
-                const savedAssignment = await createAssignment(newAssignment);
+               savedAssignment = await updateAssignment(
+                editAssignments.id,
+                assignmentData
+               );
+
+               setAssignments(prev => 
+                prev.map(assignment => 
+                    assignment.id === savedAssignment.id
+                    ? savedAssignment
+                    : assignment
+                )
+               );
+            } else { // create new assignment
+                savedAssignment = await createAssignment(assignmentData);
                 setAssignments(prev => [...prev, savedAssignment]);
+            }
+
+            //upload file after assignment has been saved
+            if(file) {
+                const formData = new FormData();
+                formData.append("file", file);
+
+                await fetch (
+                    `http://localhost:8080/attachments/upload/${savedAssignment.id}`,
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
             }
             setEditAssignments(null); //clears edit mode after saving
             setShowForm(false); //closes form after saving

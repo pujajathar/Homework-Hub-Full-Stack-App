@@ -1,0 +1,111 @@
+package com.example.homework_hub_backend.controllers;
+
+import com.example.homework_hub_backend.models.Assignment;
+import com.example.homework_hub_backend.models.Attachment;
+import com.example.homework_hub_backend.repositories.AssignmentRepository;
+import com.example.homework_hub_backend.repositories.AttachmentRepository;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+@RestController
+@RequestMapping("/attachments")
+@CrossOrigin(origins = "http://localhost:5173")
+public class AttachmentController {
+
+    private final AttachmentRepository attachmentRepository;
+
+    private final AssignmentRepository assignmentRepository;
+
+    private final String uploadDirectory = "uploads/";
+
+    public AttachmentController(AttachmentRepository attachmentRepository, AssignmentRepository assignmentRepository) {
+        this.attachmentRepository = attachmentRepository;
+        this.assignmentRepository = assignmentRepository;
+    }
+
+    @PostMapping("/upload/{assignmentId}")
+    public ResponseEntity<String> uploadFile(
+            @PathVariable Long assignmentId,
+            @RequestParam("file")MultipartFile file)
+    {
+        try {
+            Assignment assignment = assignmentRepository.findById(assignmentId)
+                    .orElseThrow(() -> new RuntimeException("Assignment not found"));
+            Path uploadPath = Paths.get(uploadDirectory);
+
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            String fileName = file.getOriginalFilename();
+            Path filePath = uploadPath.resolve(fileName);
+
+            Files.write(filePath, file.getBytes());
+
+            Attachment attachment =new Attachment();
+            attachment.setFileName(fileName);
+            attachment.setFileType(file.getContentType());
+            attachment.setFilePath(filePath.toString());
+            attachment.setAssignment(assignment);
+
+            attachmentRepository.save(attachment);
+
+            return ResponseEntity.ok("File uploaded successfully. ");
+
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().body("File upload failed.");
+        }
+    }
+
+    @GetMapping("/{id}") // Attachment retrive/Download endpoint
+    public ResponseEntity<Resource> downloadFile(@PathVariable Long id) throws MalformedURLException {
+
+        Attachment attachment = attachmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Attachment not found."));
+
+        Path filePath = Paths.get(attachment.getFilePath());
+        UrlResource resource = new UrlResource(filePath.toUri());
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + attachment.getFileName() + "\"")
+                .header(
+                        HttpHeaders.CONTENT_TYPE,
+                        attachment.getFileType()
+                ).body(resource);
+    }
+
+    @GetMapping("/{id}/view")
+    public ResponseEntity<Resource> viewFile(@PathVariable Long id) throws MalformedURLException {
+        //find the attachment in the database
+        Attachment attachment = attachmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Attachment not found."));
+
+        //Get the location of the stored file
+        Path filePath = Paths.get(attachment.getFilePath());
+        UrlResource resource = new UrlResource(filePath.toUri());
+
+        //Open the file in the browser instead of downloading it
+        return ResponseEntity.ok()
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "inline; filename=\"" + attachment.getFileName() + "\""
+                )
+                .header(
+                        HttpHeaders.CONTENT_TYPE,
+                        attachment.getFileType()
+                )
+                .body(resource);
+    }
+
+}

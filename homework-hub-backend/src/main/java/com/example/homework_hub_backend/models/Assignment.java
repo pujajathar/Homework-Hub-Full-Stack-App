@@ -1,7 +1,7 @@
 package com.example.homework_hub_backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +18,13 @@ public class Assignment {
     private String category; // New field for category
     private String status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "assignment") //one assignment can have many notifications
     private List<Notification> notifications = new ArrayList<>();
+
+    //one assignment can have multiple attachments
+    @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Attachment> attachments = new ArrayList<>();
 
     public Assignment() {
     }
@@ -76,5 +81,13 @@ public class Assignment {
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
+    }
+
+    public List<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Attachment> attachments) {
+        this.attachments = attachments;
     }
 }
