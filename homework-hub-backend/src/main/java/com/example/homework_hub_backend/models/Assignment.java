@@ -23,7 +23,6 @@ public class Assignment {
     private List<Notification> notifications = new ArrayList<>();
 
     //one assignment can have multiple attachments
-    @JsonIgnore
     @OneToMany(mappedBy = "assignment", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Attachment> attachments = new ArrayList<>();
 
