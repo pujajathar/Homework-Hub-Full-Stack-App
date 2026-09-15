@@ -96,6 +96,9 @@ const handleEdit = (id) => {
                         body: formData
                     }
                 );
+                //fetch assignments again so the new attachment appears immediately
+                const updatedAssignments = await getAssignments();
+                setAssignments(updatedAssignments);
             }
             setEditAssignments(null); //clears edit mode after saving
             setShowForm(false); //closes form after saving
