@@ -9,4 +9,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
     long countByIsReadFalse();
     List<Notification> findByRecipient(String recipient);
     long countByRecipientAndIsReadFalse(String recipient);
+
+    Iterable<? extends Notification> findByAssignmentId(Long id);
 }
