@@ -89,7 +89,8 @@
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 8px;
-    max-width: 500px;
+    min-width: 280px;
+    max-width: 300px;
 }
 .attachments strong { 
     display: block;
