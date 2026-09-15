@@ -13,6 +13,8 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
     });
 
     const [file, setFile] = useState(null); //Stores the selected attachment file
+    //Stores existing attachment for assignment
+    const [existingAttachments, setExistingAttachments] = useState([]);
 
     const [errors, setErrors] = useState({}); //stores validation error messages for each form field
 
@@ -20,6 +22,17 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
     useEffect (() => {      
         if (editAssignment) {  // if user clicks edit on existing assignment then form is filled with it's data
             setAssignment(editAssignment);
+
+            //fetch existing attachment for this assignment
+            fetch(`http://localhost:8080/attachments/assignment/${editAssignment.id}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setExistingAttachments(data);
+            })
+            .catch((error) => {
+                console.error("{Error fetching attachment:", error);
+                setExistingAttachments(null);
+            })
         } else {   //if not clears the form and this reset the form for creating new assignment
             setAssignment({
                 category:"",
@@ -161,6 +174,26 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                     )}
                 </label>
                 <label>Attachment:
+                    {/* Displays existing attachment when editing an assignment */}
+                   {existingAttachments.map((attachment) => (
+                    <div className="existing-attachment" key={attachment.id}>
+                        <span>{attachment.fileName}</span>
+                        {/* view attachment in the browser */}
+                        <a 
+                        href={`http://localhost:8080/attachments/${attachment.id}/view`}
+                        target="_blank"
+                        rel="noopener noreferrer">
+                            View
+                        </a>
+                        {/* Download the attachment */}
+                        <a href={`http://localhost:8080/attachments/${attachment.id}`}
+                        
+                        rel="noopener noreferrer">
+                            Download
+                        </a>
+                    </div>
+                   ))}
+                    {/* Allows user to select new attachment */}
                     <input type="file"
                     onChange={handleFileChange} />
                 </label>

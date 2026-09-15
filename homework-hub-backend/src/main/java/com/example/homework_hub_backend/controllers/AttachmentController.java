@@ -16,6 +16,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @RestController
 @RequestMapping("/attachments")
@@ -106,6 +107,14 @@ public class AttachmentController {
                         attachment.getFileType()
                 )
                 .body(resource);
+    }
+
+    @GetMapping("/assignment/{assignmentId}")
+    public ResponseEntity<List<Attachment>> getAttachmentByAssignment (@PathVariable Long assignmentId) {
+        //Finds all attachments belonging to the assignment.
+        List<Attachment> attachments = attachmentRepository.findByAssignmentId(assignmentId);
+        //Returns the attachments to front-end.
+        return ResponseEntity.ok(attachments);
     }
 
 }
