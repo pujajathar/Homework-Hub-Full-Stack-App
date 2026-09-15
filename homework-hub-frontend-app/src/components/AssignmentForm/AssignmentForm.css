@@ -62,6 +62,11 @@
 .cancel-btn { background-color: #e14c5b; color: white; }
 .cancel-btn:hover {  transform: translateY(-2px); background-color: #f50b16e4;}
 
+.form-error {
+    color: #c62828;
+    font-size: 14px;
+    margin-top: 4px;
+}
 /* Media query for Tablets */
 @media (max-width: 900px) {
     .assignment-form-container { width: 90%; padding: 1.5rem;}
