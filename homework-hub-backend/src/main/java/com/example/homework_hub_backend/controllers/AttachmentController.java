@@ -85,4 +85,27 @@ public class AttachmentController {
                 ).body(resource);
     }
 
+    @GetMapping("/{id}/view")
+    public ResponseEntity<Resource> viewFile(@PathVariable Long id) throws MalformedURLException {
+        //find the attachment in the database
+        Attachment attachment = attachmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Attachment not found."));
+
+        //Get the location of the stored file
+        Path filePath = Paths.get(attachment.getFilePath());
+        UrlResource resource = new UrlResource(filePath.toUri());
+
+        //Open the file in the browser instead of downloading it
+        return ResponseEntity.ok()
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "inline; filename=\"" + attachment.getFileName() + "\""
+                )
+                .header(
+                        HttpHeaders.CONTENT_TYPE,
+                        attachment.getFileType()
+                )
+                .body(resource);
+    }
+
 }
