@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import './AssignmentList.css';
 function AssignmentList ({
     assignments, 
@@ -9,6 +10,8 @@ function AssignmentList ({
     onEdit,
     handleDelete
  }) {
+
+    const [deleteId, seetDeleteId] = useState(null);
   
     return (
         <div className="assignment-list">
@@ -56,10 +59,31 @@ function AssignmentList ({
                                 <button
                                     type="button"
                                     className="delete-btn"
-                                    onClick={() => handleDelete(assignment.id)}
+                                    onClick={() => seetDeleteId(assignment.id)}
                                 >
                                     Delete
                                 </button>
+
+                                {deleteId === assignment.id && (
+                                    <div className='delete-confirmation'>
+                                        <span>Are you sure?</span>
+                                        <button
+                                        type='button'
+                                        onClick={() => {
+                                            handleDelete(assignment.id);
+                                            seetDeleteId(null);
+                                        }}
+                                        >
+                                            Yes
+                                        </button>
+                                        <button
+                                        type='button'
+                                        onClick={() => seetDeleteId(null)}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                )}
 
                             </div>
                         )}
