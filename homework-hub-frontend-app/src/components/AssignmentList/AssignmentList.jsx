@@ -27,24 +27,25 @@ function AssignmentList ({
                         </button>
                         )}
                     <div>
+                        <div className='title-category'>
                         <h3 className={completedAssignments.includes(assignment.id) ? "completed" : ''}> {/* adds CSS class conditionaly used for text decoration line through */}
-                            {assignment.title}
-                        </h3>
-                        <p className="description">
+                          📝 {assignment.title}
+                        </h3>  
+                                                    <span className={`tag ${assignment.category?.toLowerCase()}`}>
+                                {assignment.category}
+                            </span>      
+                            </div>                            
+                       <p className="description">
                             {assignment.description}
-                        </p>
+                        </p>                       
                         <p className="due">
                             Due on : {assignment.dueDate}
                         </p>
-
-                                   
-                                 
                     </div>
+                  
                     </div>
                         <div className="assignment-right">  {/*right side */}
-                            <span className={`tag ${assignment.category?.toLowerCase()}`}>
-                                {assignment.category}
-                            </span>
+
                        {showActions && (
                             <div className="buttonspace">
 

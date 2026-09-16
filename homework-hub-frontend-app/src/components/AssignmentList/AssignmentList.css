@@ -20,9 +20,23 @@
     display: flex;
     align-items: center;
     min-width: 0;
-    flex: 1;
+    flex-basis: 100%;
 }
 
+.title-category {
+    display: flex;
+    align-items:center;
+    gap: 12px;
+    flex-direction: row;
+    width: max-content;
+}
+.title-category h3 {
+    margin: 0;
+    white-space: nowrap;
+}
+.title-category .tag {
+    flex-shrink: 0;
+}
 .description {
     margin: 5px 0;
     font-size: 0.95rem;
@@ -35,14 +49,25 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-shrink: 0;
+    width: 100%;
+    flex-basis: 100%;
 }
 .check-btn{
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    padding: 0;
+    transition: transform 0.2s ease;
 }
+.check-btn:hover {
+    transform: scale(1.20);
+}
+.check-btn:active {
+    transform: scale(0.85);
+}
+
 .completed{
     text-decoration: line-through;
     color: gray;
