@@ -34,35 +34,6 @@ function AssignmentList ({
                             Due on : {assignment.dueDate}
                         </p>
 
-                        {/* Displays attachments when an assignment has files
-                        and Display view & download options for attachment */}
-                        {assignment.attachments?.length > 0 && (
-                            <div className='attachments'>
-                                <strong>Attachment:</strong>
-
-                                {assignment.attachments.map((attachment) => (
-                                    <div key={attachment.id}>
-                                        <span>📎{attachment.fileName}</span>
-
-                                        {/* Opens attachment in new browser tab */}
-                                        <a 
-                                        href={`http://localhost:8080/attachments/${attachment.id}/view`}
-                                        target='_blank'
-                                        rel='noopener noreferrer'>
-                                            View
-                                        </a>
-
-                                        {/* Download the attachment */}
-                                        <a 
-                                        href={`http://localhost:8080/attachments/${attachment.id}`}
-                                        download>
-                                            Download
-                                        </a>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                      
                                    
                                  
                     </div>
@@ -93,6 +64,36 @@ function AssignmentList ({
                             </div>
                         )}
                          </div>
+                         
+                        {/* Displays attachments when an assignment has files
+                        and Display view & download options for attachment */}
+                        {assignment.attachments?.length > 0 && (
+                            <div className='attachments'>
+                                <strong>Attachment:</strong>
+
+                                {assignment.attachments.map((attachment) => (
+                                    <div key={attachment.id}>
+                                        <span>📎{attachment.fileName}</span>
+
+                                        {/* Opens attachment in new browser tab */}
+                                        <a 
+                                        href={`http://localhost:8080/attachments/${attachment.id}/view`}
+                                        target='_blank'
+                                        rel='noopener noreferrer'>
+                                            View
+                                        </a>
+
+                                        {/* Download the attachment */}
+                                        <a 
+                                        href={`http://localhost:8080/attachments/${attachment.id}`}
+                                        download>
+                                            Download
+                                        </a>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                      
                 </div>  
             ))}
         </div> 

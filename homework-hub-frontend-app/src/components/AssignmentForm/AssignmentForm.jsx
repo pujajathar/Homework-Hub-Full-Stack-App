@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./AssignmentForm.css";
 
 
-function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handleDelete}) { //assignment propery passing from teachers page
+function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel}) { //assignment propery passing from teachers page
 
     const [assignment, setAssignment] = useState({
             category: editAssignment?.category || "", // ?. is optional chaining, it prevent error if editAssignment doesn't exists
@@ -59,6 +59,30 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
 
     const handleFileChange = (e) => { // Stores file selected by user
         setFile(e.target.files[0]);
+    };
+
+    const handleDeleteAttachment = async(attachmentId) => {
+        try {
+            const response = await fetch (
+                `http://localhost:8080/attachments/${attachmentId}`,
+                {
+                    method: "DELETE",
+                }
+            );
+            if(!response.ok) {
+                throw new Error("Failed to delete assignment");
+            }
+
+            //Removes deleted attachment from the form immediately
+            setExistingAttachments((previousAttachments) => 
+                previousAttachments.filter (
+                    (attachment) => attachment.id !== attachmentId
+                )
+            );
+        } catch (error) { console.error("Error deleting attachment:", error);
+
+        }
+        
     };
 
     //Checks the required form fields before submitting.
@@ -191,6 +215,14 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel, handle
                         rel="noopener noreferrer">
                             Download
                         </a>
+
+                        {/* Delete attachment */}
+                        <button 
+                        type="button"
+                        onClick={() => handleDeleteAttachment(attachment.id)}
+                        >
+                            Delete
+                        </button>
                     </div>
                    ))}
                     {/* Allows user to select new attachment */}

@@ -6,10 +6,11 @@
 }
 .assignment-row{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     width: 100%;
     gap: 12px;
-    align-items:center;
+    align-items:flex-start;
     padding: 18px;
     border-radius: 12px;
     background: white;
@@ -84,13 +85,15 @@
 }
 
 .attachments { 
+    flex-basis: 100%;
     margin-top: 10px;
     padding: 10px 12px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 8px;
-    min-width: 280px;
-    max-width: 300px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
 }
 .attachments strong { 
     display: block;
@@ -99,14 +102,20 @@
     color: #444;
 }
 
-.attachments div {
+.attachments  div {
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 7px 0;
     border-top: 1px solid #e5e5e5;
+    flex-wrap: wrap;
 }
-.attachments span { margin-right: 5px; overflow-wrap: anywhere;}
+.attachments span {
+    flex: 1;
+    min-width: 150px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
 .attachments a { 
     text-decoration: none;
     font-size: 13px;

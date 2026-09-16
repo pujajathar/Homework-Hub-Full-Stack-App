@@ -117,4 +117,26 @@ public class AttachmentController {
         return ResponseEntity.ok(attachments);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteAttachment(@PathVariable Long id) {
+        try {
+                Attachment attachment = attachmentRepository.findById(id)
+                        .orElseThrow(() -> new RuntimeException("Attachment not found."));
+
+                // Delete physical file
+                Path filePath = Paths.get(attachment.getFilePath());
+
+                if (Files.exists(filePath)) {
+                    Files.delete(filePath);
+                }
+
+                // Delete attachment from database
+                attachmentRepository.delete(attachment);
+                return ResponseEntity.ok("Attachment deleted successfully.");
+
+            } catch(IOException e){
+                return ResponseEntity.internalServerError().body("Failed to delete attachment file.");
+            }
+    }
+
 }
