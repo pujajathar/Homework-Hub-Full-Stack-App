@@ -6,7 +6,9 @@ import com.example.homework_hub_backend.repositories.AssignmentRepository;
 import com.example.homework_hub_backend.repositories.AttachmentRepository;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,7 +70,7 @@ public class AttachmentController {
         }
     }
 
-    @GetMapping("/{id}") // Attachment retrive/Download endpoint
+    @GetMapping("/download/{id}") // Attachment retrive/Download endpoint
     public ResponseEntity<Resource> downloadFile(@PathVariable Long id) throws MalformedURLException {
 
         Attachment attachment = attachmentRepository.findById(id)
@@ -78,12 +80,12 @@ public class AttachmentController {
         UrlResource resource = new UrlResource(filePath.toUri());
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + attachment.getFileName() + "\"")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .header(
-                        HttpHeaders.CONTENT_TYPE,
-                        attachment.getFileType()
-                ).body(resource);
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + attachment.getFileName() + "\""
+                )
+                .body(resource);
     }
 
     @GetMapping("/{id}/view")

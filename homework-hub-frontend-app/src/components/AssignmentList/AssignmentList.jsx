@@ -110,8 +110,8 @@ function AssignmentList ({
 
                                         {/* Download the attachment */}
                                         <a 
-                                        href={`http://localhost:8080/attachments/${attachment.id}`}
-                                        download>
+                                        href={`http://localhost:8080/attachments/download/${attachment.id}`}
+                                        >
                                             Download
                                         </a>
                                     </div>
