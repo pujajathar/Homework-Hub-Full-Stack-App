@@ -96,6 +96,18 @@
 .existing-attachment a:last-of-type:hover {
     background-color: #aaee88;
 }
+
+.existing-attachment button {
+    background-color: #e42719;
+    color: white;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.existing-attachment button:hover {
+    background-color: #dc6229;
+}
 /* Media query for Tablets */
 @media (max-width: 900px) {
     .assignment-form-container { width: 90%; padding: 1.5rem;}
