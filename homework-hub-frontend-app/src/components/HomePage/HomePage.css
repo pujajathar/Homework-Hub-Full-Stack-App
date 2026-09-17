@@ -49,7 +49,7 @@
     50% { transform: translateY(-12px); }
 }
 
-.role-selction {
+.role-selection {
     margin-top: 3rem;
 }
 .role-selection h2 {
@@ -102,6 +102,14 @@
     .hero-left .tagline { font-size: 1.8rem;}
     .hero-buttons {
         flex-direction: column;
+    }
+    .hero-image {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .hero-image img {
+        height: 150px;
     }
 }
 /*Media query for Tablets*/
