@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,11 +80,15 @@ public class AttachmentController {
         Path filePath = Paths.get(attachment.getFilePath());
         UrlResource resource = new UrlResource(filePath.toUri());
 
+        ContentDisposition contentDisposition = ContentDisposition
+                .attachment()
+                .filename(attachment.getFileName(), StandardCharsets.UTF_8)
+                .build();
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + attachment.getFileName() + "\""
+                        contentDisposition.toString()
                 )
                 .body(resource);
     }
@@ -96,13 +101,19 @@ public class AttachmentController {
 
         //Get the location of the stored file
         Path filePath = Paths.get(attachment.getFilePath());
+        //Create resource from file path so spring can send the file.
         UrlResource resource = new UrlResource(filePath.toUri());
+
+        ContentDisposition contentDisposition = ContentDisposition
+                .inline()
+                .filename(attachment.getFileName(), StandardCharsets.UTF_8)
+                .build();
 
         //Open the file in the browser instead of downloading it
         return ResponseEntity.ok()
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
-                        "inline; filename=\"" + attachment.getFileName() + "\""
+                        contentDisposition.toString()
                 )
                 .header(
                         HttpHeaders.CONTENT_TYPE,
