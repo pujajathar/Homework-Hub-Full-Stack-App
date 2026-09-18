@@ -1,6 +1,55 @@
+<div align="center">
+
 # 🌈 AaruEdu - Homework Hub
 
 > Learn. Grow. Achieve.
+ 
+</div>  
+
+<div align="center">
+
+![JavaScript](https://img.shields.io/badge/JavaScript-F0DB4F?style=flat&logo=javascript&logoColor=323330)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=20232A)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
+ ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat&logo=react-router&logoColor=white)
+ ![CSS](https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3&logoColor=white)
+ ![FullCalendar](https://img.shields.io/badge/FullCalendar-4285F4?style=flat) <br>
+![Fetch API](https://img.shields.io/badge/Fetch_API-000000?style=flat)
+![Java 21](https://img.shields.io/badge/Java_21-ED8B00?style=flat&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=springboot&logoColor=white)
+![Spring Web](https://img.shields.io/badge/Spring_Web-6DB33F?style=flat&logo=spring&logoColor=white)
+![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=flat&logo=spring&logoColor=white)
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=flat&logo=hibernate&logoColor=white) <br>
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=flat&logo=apachemaven&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+ ![JPA/Hibernate](https://img.shields.io/badge/JPA%2FHibernate-59666C?style=flat&logo=hibernate&logoColor=white)
+ ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) <br>
+ ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=flat&logo=intellijidea&logoColor=white)
+ ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white)
+ ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=flat&logo=junit5&logoColor=white)
+![H2](https://img.shields.io/badge/H2-1F4E79?style=flat)
+![Chrome DevTools](https://img.shields.io/badge/Chrome_DevTools-4285F4?style=flat&logo=googlechrome&logoColor=white)
+
+</div>
+
+<hr style="height: 4px; background-color: #333; border: none;">
+
+<div align="center">
+
+[About](#-about-the-project) •
+[Features](#-features) •
+[Tech Stack](#️-technologies-used) •
+[Installation](#-getting-started) •
+[Database](#️-database-structure-erd) •
+[API](#-api-endpoints) •
+[Future Features](#-future-features)
+
+</div>
+
+<hr style="height: 4px; background-color: #333; border: none;">
+
 
 ## 📖 About the Project
 
