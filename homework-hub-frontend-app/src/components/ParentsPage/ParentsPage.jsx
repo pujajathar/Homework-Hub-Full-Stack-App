@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import AssignmentList from "../AssignmentList/AssignmentList";
-import { mockMessages, mockAssignments, mockParent } from "../mockData";
+import { mockParent } from "../mockData";
 import './ParentsPage.css';
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
@@ -115,21 +115,6 @@ return (
                             <p className="progress-note">{completed} of {assignments.length} assignments completed this week.</p>
                 </section>
 
-                {/* <section className="card">
-                <h2>Messages from Teachers: </h2>
-                <ul className="message-list">
-                    {mockMessages.map(m => (
-                        <li key={m.id} className={`message-item ${m.read ? "" : "unread"}`}>
-                            <div className={`message-dot ${m.read ? "read" : ""}`} />
-                            <div>
-                                <div className="message-from">{m.from}</div>
-                                <div className="message-subject">{m.subject}</div>
-                            </div>
-                            <span className="message-date">{m.date}</span>
-                        </li>             
-                    ))}
-                </ul>
-            </section> */}
             <section className="card">
                 <h2>Assignment Calendar 📅</h2>
                 <AssignmentCalendar assignments={assignments} />  {/* Assignment calendar component displays assignments in a calendar view */}

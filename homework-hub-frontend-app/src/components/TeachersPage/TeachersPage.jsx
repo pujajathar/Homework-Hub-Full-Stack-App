@@ -1,16 +1,14 @@
 
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { mockAssignments, mockStudents } from "../mockData";
+import { useNavigate } from "react-router-dom";
+import { mockStudents } from "../mockData";
 import AssignmentForm from "../AssignmentForm/AssignmentForm";
-import Footer from "../Footer/Footer";
 import Button from "../Button/Button";
 import teacher from "../../assets/images/teacher.png";
 import './TeachersPage.css';
 import AssignmentList from "../AssignmentList/AssignmentList";
 import {getAssignments, createAssignment, updateAssignment, deleteAssignment } from "../Api/AssignmentApi.js";
 import AssignmentCalendar from "../AssignmentCalendar/AssignmentCalendar";
-import Header from "../Header/Header";
 
 function TeachersPage ( { assignments, setAssignments, setUser } ) {
 
@@ -42,11 +40,11 @@ function TeachersPage ( { assignments, setAssignments, setUser } ) {
         setUser(null);
         navigate("/");
     } 
-const handleEdit = (id) => {
-    const assignment = assignments.find((item) => item.id === id);
-    setEditAssignments(assignment);
-    setShowForm(true);
-};
+    const handleEdit = (id) => {
+        const assignment = assignments.find((item) => item.id === id);
+        setEditAssignments(assignment);
+        setShowForm(true);
+    };
     const handleDelete = async (id) => {
         try {
             await deleteAssignment(id); 
@@ -253,7 +251,7 @@ const handleEdit = (id) => {
                 <h2>Assignment Calendar 📅</h2>
                 <AssignmentCalendar assignments={assignments} />  {/* Assignment calendar component displays assignments in a calendar view */}
             </section>
-          </div>
+         </div>
         </div>
     </div>
 </div>  

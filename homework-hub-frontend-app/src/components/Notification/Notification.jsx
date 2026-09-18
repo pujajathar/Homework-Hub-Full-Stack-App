@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import './Notification.css';
+
 function Notification({ onNotificationRead, recipient}) {
+
+    //Stores the notifications received from backend
     const [notifications, setNotifications] = useState([]);
+
     useEffect(() => {
+        //Fetch notifications for the current recipient
         const fetchNotifications = () => {
     fetch(`http://localhost:8080/notifications/${recipient}`)  //fetches notifications from backend
         .then((response) => {
@@ -12,25 +17,29 @@ function Notification({ onNotificationRead, recipient}) {
         .then((data) => {
                         console.log("Notifications from backend:", data);
 
-            setNotifications(data);
+            setNotifications(data); //Stores notifications in state
         })
         .catch((error) => console.error('Error fetching notifications:', error));
     };
 
-    fetchNotifications(); //get notifications immediately
-    const interval = setInterval(fetchNotifications, 5000); //fetches notifications every 5 seconds
-    return () => clearInterval(interval); //clears interval when component unmounts
-}, [recipient]);
+    fetchNotifications(); //get notifications immediately when component loads
 
+    const interval = setInterval(fetchNotifications, 5000); //fetches/checks for notifications every 5 seconds
+
+    return () => clearInterval(interval); //clears interval when component unmounts
+
+    }, [recipient]);
+
+     //marking a notification as read or unread
     const handleToggleRead = (notification) => { 
-     //handles marking a notification as read or unread
-     const newReadStatus = !notification.read; //toggles the read status
-    const updatedNotifications = {
+    
+    const newReadStatus = !notification.read; //toggles the read status/reverse the current read status
+    const updatedNotifications = {  //Creates updated notification data
         message: notification.message,
         read: !notification.read,  //toggles the read status
         createdAt: notification.createdAt
     };
-    fetch(`http://localhost:8080/notifications/${notification.id}`, {
+    fetch(`http://localhost:8080/notifications/${notification.id}`, { //        // Send the updated read status to the backend
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -44,30 +53,33 @@ function Notification({ onNotificationRead, recipient}) {
         return response.json();
     })
     .then((updatedNotification) => {
+        // Updates the notification in the local state
         setNotifications((prevNotifications) =>
             prevNotifications.map((notification) => 
                 (notification.id === updatedNotification.id 
                     ? updatedNotification : notification))
         );
 
+        //Updates unread notification count in the parent component
         if (newReadStatus) {
-            onNotificationRead(-1); //notify parent component that a notification has been read
+            onNotificationRead(-1); 
         } else {
-            onNotificationRead(1); //notify parent component that a notification has been marked as unread
+            onNotificationRead(1);
         }
     })
     .catch((error) => console.error('Error updating notification:', error));
 };
 
+//Deletes Notification
 const handleDeleteNotification = (notificationId) => {
-    fetch(`http://localhost:8080/notifications/${notificationId}`, {
+    fetch(`http://localhost:8080/notifications/${notificationId}`, { //Sends delete request to backend
         method: 'DELETE'
     })
     .then((response) => {
         if (!response.ok) {
             throw new Error('Failed to delete notification');
         }
-        setNotifications((prevNotifications) =>
+        setNotifications((prevNotifications) =>  //Removes deleted notification from local state
             prevNotifications.filter((notification) => notification.id !== notificationId)
         );
     })

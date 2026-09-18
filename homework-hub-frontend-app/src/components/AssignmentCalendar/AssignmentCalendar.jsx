@@ -4,6 +4,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import './AssignmentCalendar.css';
 
 function AssignmentCalendar({ assignments }) {
+
+    //Convers assignments into events that FullCalendar can display.
     const events = assignments.map((assignment) => ({
         id: assignment.id,
         title: assignment.title,
@@ -13,9 +15,9 @@ function AssignmentCalendar({ assignments }) {
     return (
         <div className="assignment-calendar">
             <FullCalendar
-                plugins={[dayGridPlugin, interactionPlugin]}
+                plugins={[dayGridPlugin, interactionPlugin]}  //Enable calendar plugins
                 initialView="dayGridMonth"
-                events={events}
+                events={events}  //Pass assignment events to calendar
             />
         </div>
     );

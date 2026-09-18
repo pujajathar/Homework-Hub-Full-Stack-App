@@ -1,14 +1,11 @@
 
 import { useState, useEffect } from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage/HomePage';
 import AboutPage from './components/AboutPage/AboutPage';
-import AssignmentList from './components/AssignmentList/AssignmentList';
 import ParentsPage from './components/ParentsPage/ParentsPage';
 import TeachersPage from './components/TeachersPage/TeachersPage';
 import StudentsPage from './components/StudentsPage/StudentsPage';
-import { mockStudents, mockBadges, mockMessages } from './components/mockData';
-import AssignmentForm from './components/AssignmentForm/AssignmentForm';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
