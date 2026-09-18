@@ -6,6 +6,19 @@
 
 AaruEdu Homework Hub is a full-stack web application designed to help elementary school parents, teachers, and students manage homework assignments in one central location. The application reduces confusion and lost information that can occur when homework instructions are shared through paper notes or other disconnected methods. Teachers can create, edit, and delete assignments, while parents and students can view assignments, track completion, receive notifications, and access attached files. Parents can also communicate with teachers and monitor their child’s progress, while students can track their own progress and earn rewards for completing their assignments. 
 
+## ✨ Features
+
+- Parent, teacher, and student dashboards
+- Create, edit, and delete homework assignments
+- Assignment due dates and calendar view
+- Assignment completion tracking
+- Parent and student notifications
+- File attachments for assignments
+- File download/viewing
+- Separate notification state for users
+- Confirmation before deleting assignments
+- Responsive design for different screen sizes
+
 ## 🛠️ Technologies Used
 
 
@@ -53,19 +66,6 @@ AaruEdu Homework Hub is a full-stack web application designed to help elementary
 | JUnit | Automated testing |
 | H2 | In-memory testing database |
 | Chrome DevTools | Browser debugging and testing |
-
-## ✨ Features
-
-- Parent, teacher, and student dashboards
-- Create, edit, and delete homework assignments
-- Assignment due dates and calendar view
-- Assignment completion tracking
-- Parent and student notifications
-- File attachments for assignments
-- File download/viewing
-- Separate notification state for users
-- Confirmation before deleting assignments
-- Responsive design for different screen sizes
 
 ## 🚀 Getting Started
 
