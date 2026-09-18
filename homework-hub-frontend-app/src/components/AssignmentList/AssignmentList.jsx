@@ -5,7 +5,6 @@ function AssignmentList ({
     assignments, 
     toggleComplete, 
     completedAssignments = [],  //receives an array containing completed assignment id's.
-    showCheckbox=true,
     showActions=false,
     onEdit,
     handleDelete
@@ -26,23 +25,22 @@ function AssignmentList ({
                             {completedAssignments.includes(assignment.id) ? "✅":"⬜"} {/*if assignment id exists show checkbox otherwise show empty box */}
                         </button>
                         )}
-                    <div>
-                        <div className='title-category'>
-                        <h3 className={completedAssignments.includes(assignment.id) ? "completed" : ''}> {/* adds CSS class conditionaly used for text decoration line through */}
-                          📝 {assignment.title}
-                        </h3>  
-                                                    <span className={`tag ${assignment.category?.toLowerCase()}`}>
-                                {assignment.category}
-                            </span>      
+                        <div>
+                            <div className='title-category'>
+                                <h3 className={completedAssignments.includes(assignment.id) ? "completed" : ''}> {/* adds CSS class conditionaly used for text decoration line through */}
+                                    📝 {assignment.title}
+                                </h3>  
+                                <span className={`tag ${assignment.category?.toLowerCase()}`}>
+                                    {assignment.category}
+                                </span>      
                             </div>                            
-                       <p className="description">
-                            {assignment.description}
-                        </p>                       
-                        <p className="due">
-                            Due on : {assignment.dueDate}
-                        </p>
-                    </div>
-                  
+                            <p className="description">
+                                {assignment.description}
+                            </p>                       
+                            <p className="due">
+                                Due on : {assignment.dueDate}
+                            </p>
+                        </div>                 
                     </div>
                         <div className="assignment-right">  {/*right side */}
 
@@ -85,10 +83,9 @@ function AssignmentList ({
                                         </button>
                                     </div>
                                 )}
-
                             </div>
                         )}
-                         </div>
+                        </div>
                          
                         {/* Displays attachments when an assignment has files
                         and Display view & download options for attachment */}
@@ -117,13 +114,12 @@ function AssignmentList ({
                                     </div>
                                 ))}
                             </div>
-                        )}
-                      
+                        )}                     
                 </div>  
             ))}
         </div> 
     );
 };
-        export default AssignmentList;
+export default AssignmentList;
         
             

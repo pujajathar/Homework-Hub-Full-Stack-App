@@ -1,15 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
-import Header from "../Header/Header";
+import { useNavigate } from "react-router-dom";
 import './StudentsPage.css';
 import AssignmentList from "../AssignmentList/AssignmentList";
-import { mockAssignments, mockStudent, mockBadges, mockTeacher, mockStudents } from "../mockData";
-import ParentsPage from "../ParentsPage/ParentsPage";
+import { mockAssignments, mockStudent, mockBadges, mockTeacher} from "../mockData";
 import { useState, useEffect } from "react";
 import Notification from "../Notification/Notification";
 import AssignmentCalendar from "../AssignmentCalendar/AssignmentCalendar";
 
 function StudentsPage ({ assignments, toggleComplete, completedAssignments, setUser}) {
- const [assignment, setAssignment] = useState(mockAssignments);
  const completed = completedAssignments.length;
  const total = assignments.length;
  const progressPct = (assignments.length > 0) ? Math.round((completed / assignments.length) * 100) : 0;

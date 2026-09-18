@@ -13,6 +13,7 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel}) { //a
     });
 
     const [file, setFile] = useState(null); //Stores the selected attachment file
+
     //Stores existing attachment for assignment
     const [existingAttachments, setExistingAttachments] = useState([]);
 
@@ -61,6 +62,7 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel}) { //a
         setFile(e.target.files[0]);
     };
 
+    //Deletes an existing attachment
     const handleDeleteAttachment = async(attachmentId) => {
         try {
             const response = await fetch (
@@ -70,7 +72,7 @@ function AssignmentForm ({onSubmit, assignment: editAssignment, onCancel}) { //a
                 }
             );
             if(!response.ok) {
-                throw new Error("Failed to delete assignment");
+                throw new Error("Failed to delete attachment.");
             }
 
             //Removes deleted attachment from the form immediately
