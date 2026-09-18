@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+//Handles API requests related to assignment attachments.
 @RestController
 @RequestMapping("/attachments")
 @CrossOrigin(origins = "http://localhost:5173")
@@ -30,7 +31,7 @@ public class AttachmentController {
 
     private final AssignmentRepository assignmentRepository;
 
-    private final String uploadDirectory = "uploads/";
+    private final String uploadDirectory = "uploads/";  //Folder where upload files are saved
 
     public AttachmentController(AttachmentRepository attachmentRepository, AssignmentRepository assignmentRepository) {
         this.attachmentRepository = attachmentRepository;
@@ -45,14 +46,14 @@ public class AttachmentController {
         try {
             Assignment assignment = assignmentRepository.findById(assignmentId)
                     .orElseThrow(() -> new RuntimeException("Assignment not found"));
-            Path uploadPath = Paths.get(uploadDirectory);
+            Path uploadPath = Paths.get(uploadDirectory); //Create path for upload directory
 
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
 
             String fileName = file.getOriginalFilename();
-            Path filePath = uploadPath.resolve(fileName);
+            Path filePath = uploadPath.resolve(fileName); //Create complete path where file will be saved
 
             Files.write(filePath, file.getBytes());
 
@@ -78,12 +79,17 @@ public class AttachmentController {
                 .orElseThrow(() -> new RuntimeException("Attachment not found."));
 
         Path filePath = Paths.get(attachment.getFilePath());
+
+        //Create a resource from file path
         UrlResource resource = new UrlResource(filePath.toUri());
 
+        //Set the file name and allow UTF-8 characters in the same
         ContentDisposition contentDisposition = ContentDisposition
                 .attachment()
                 .filename(attachment.getFileName(), StandardCharsets.UTF_8)
                 .build();
+
+        //Return the file as downloadable response
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .header(
@@ -104,12 +110,14 @@ public class AttachmentController {
         //Create resource from file path so spring can send the file.
         UrlResource resource = new UrlResource(filePath.toUri());
 
+        //Set the file to open inline in the browser
+        //UTF-8 allows filename with special characters
         ContentDisposition contentDisposition = ContentDisposition
                 .inline()
                 .filename(attachment.getFileName(), StandardCharsets.UTF_8)
                 .build();
 
-        //Open the file in the browser instead of downloading it
+        //Return the file so browser can display it
         return ResponseEntity.ok()
                 .header(
                         HttpHeaders.CONTENT_DISPOSITION,
