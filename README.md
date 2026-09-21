@@ -1,12 +1,16 @@
 <div align="center">
 
-# 🌈 AaruEdu - Homework Hub
+![Home Page](./preview/homepage.png)
+
+# 🌈 AaruEdu - Homework Hub : Full Stack Web Application
 
 > Learn. Grow. Achieve.
  
 </div>  
 
 <div align="center">
+
+
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-F0DB4F?style=flat&logo=javascript&logoColor=323330)
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=20232A)
