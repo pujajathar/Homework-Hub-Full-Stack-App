@@ -93,7 +93,7 @@ AaruEdu Homework Hub is a full-stack web application designed to help elementary
 
 <p align="top">
 <img src="./preview/calendar.png" alt="Assignment Calendar" style="vertical-align: top;"> &nbsp;&nbsp;
-<img src="./preview/assignment.png" alt="Assignment creation and file uploading">   &nbsp;&nbsp;<br> 
+<img src="./preview/assignment.png" alt="Assignment creation and file uploading" style="vertical-align: top;">   &nbsp;&nbsp;<br> 
 
  **🔔 Notifications**
 
