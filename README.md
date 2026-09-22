@@ -2,6 +2,8 @@
 
 ![Home Page](./preview/home.png)
 
+<hr style="height: 4px; background-color: #333; border: none;">
+
 # 📚 AaruEdu - Homework Hub: Full-Stack Web Application
 
 > Learn. Grow. Achieve.
