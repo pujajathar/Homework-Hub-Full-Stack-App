@@ -14,29 +14,29 @@
 
 
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F0DB4F?style=flat&logo=javascript&logoColor=323330)
-![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=20232A)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)
- ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat&logo=react-router&logoColor=white)
- ![CSS](https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3&logoColor=white)
- ![FullCalendar](https://img.shields.io/badge/FullCalendar-4285F4?style=flat) <br>
-![Fetch API](https://img.shields.io/badge/Fetch_API-000000?style=flat)
-![Java 21](https://img.shields.io/badge/Java_21-ED8B00?style=flat&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=springboot&logoColor=white)
-![Spring Web](https://img.shields.io/badge/Spring_Web-6DB33F?style=flat&logo=spring&logoColor=white)
-![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=flat&logo=spring&logoColor=white)
-![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=flat&logo=hibernate&logoColor=white) <br>
-![Maven](https://img.shields.io/badge/Maven-C71A36?style=flat&logo=apachemaven&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
- ![JPA/Hibernate](https://img.shields.io/badge/JPA%2FHibernate-59666C?style=flat&logo=hibernate&logoColor=white)
- ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white) <br>
- ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
-![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=flat&logo=intellijidea&logoColor=white)
- ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white)
- ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=flat&logo=junit5&logoColor=white)
-![H2](https://img.shields.io/badge/H2-1F4E79?style=flat)
-![Chrome DevTools](https://img.shields.io/badge/Chrome_DevTools-4285F4?style=flat&logo=googlechrome&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F0DB4F?style=for-the-badge&logo=javascript&logoColor=323330)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=20232A)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+ ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+ ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+ ![FullCalendar](https://img.shields.io/badge/FullCalendar-4285F4?style=for-the-badge) <br>
+![Fetch API](https://img.shields.io/badge/Fetch_API-000000?style=for-the-badge)
+![Java 21](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![Spring Web](https://img.shields.io/badge/Spring_Web-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white) <br>
+![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+ ![JPA/Hibernate](https://img.shields.io/badge/JPA%2FHibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white)
+ ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) <br>
+ ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=for-the-badge&logo=intellijidea&logoColor=white)
+ ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
+ ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit5&logoColor=white)
+![H2](https://img.shields.io/badge/H2-1F4E79?style=for-the-badge)
+![Chrome DevTools](https://img.shields.io/badge/Chrome_DevTools-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)
 
 </div>
 
@@ -107,41 +107,41 @@ AaruEdu Homework Hub is a full-stack web application designed to help elementary
 
 | Technology | Purpose |
 |---|---|
-|![JavaScript](https://img.shields.io/badge/JavaScript-F0DB4F?style=flat&logo=javascript&logoColor=323330)| Core programming language |
-|![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=20232A)| User interface |
-|![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)| Development and build tool |
-| ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat&logo=react-router&logoColor=white)| Application routing |
-| ![CSS](https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3&logoColor=white)| Styling and responsive design |
-| ![FullCalendar](https://img.shields.io/badge/FullCalendar-4285F4?style=flat)| Assignment calendar |
-|![Fetch API](https://img.shields.io/badge/Fetch_API-000000?style=flat)| API communication |
+|![JavaScript](https://img.shields.io/badge/JavaScript-F0DB4F?style=for-the-badge&logo=javascript&logoColor=323330)| Core programming language |
+|![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=20232A)| User interface |
+|![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)| Development and build tool |
+| ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)| Application routing |
+| ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)| Styling and responsive design |
+| ![FullCalendar](https://img.shields.io/badge/FullCalendar-4285F4?style=for-the-badge)| Assignment calendar |
+|![Fetch API](https://img.shields.io/badge/Fetch_API-000000?style=for-the-badge)| API communication |
 
 ## ⚙️ Back End
 
 | Technology | Purpose |
 |---|---|
-| ![Java 21](https://img.shields.io/badge/Java_21-ED8B00?style=flat&logo=openjdk&logoColor=white)| Backend programming language |
-| ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=springboot&logoColor=white)| Backend framework |
-| ![Spring Web](https://img.shields.io/badge/Spring_Web-6DB33F?style=flat&logo=spring&logoColor=white)| REST API |
-| ![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=flat&logo=spring&logoColor=white)| Data persistence |
-| ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=flat&logo=hibernate&logoColor=white)| ORM |
-| ![Maven](https://img.shields.io/badge/Maven-C71A36?style=flat&logo=apachemaven&logoColor=white)| Dependency management |
+| ![Java 21](https://img.shields.io/badge/Java_21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)| Backend programming language |
+| ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)| Backend framework |
+| ![Spring Web](https://img.shields.io/badge/Spring_Web-6DB33F?style=for-the-badge&logo=spring&logoColor=white)| REST API |
+| ![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=for-the-badge&logo=spring&logoColor=white)| Data persistence |
+| ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white)| ORM |
+| ![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)| Dependency management |
 
 
 ## 🗄️ Database
 
 | Technology | Purpose |
 |---|---|
-| ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)| Relational database |
-| ![JPA/Hibernate](https://img.shields.io/badge/JPA%2FHibernate-59666C?style=flat&logo=hibernate&logoColor=white)| Object-relational mapping |
+| ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)| Relational database |
+| ![JPA/Hibernate](https://img.shields.io/badge/JPA%2FHibernate-59666C?style=for-the-badge&logo=hibernate&logoColor=white)| Object-relational mapping |
 
 
 
 ## 🛠️ Development Tools
-- ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
-- ![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)
-- ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white)
-- ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=flat&logo=intellijidea&logoColor=white)
-- ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white)
+- ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+- ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
+- ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
+- ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-000000?style=for-the-badge&logo=intellijidea&logoColor=white)
+- ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 <hr style="height: 4px; background-color: #333; border: none;">
 
@@ -149,9 +149,9 @@ AaruEdu Homework Hub is a full-stack web application designed to help elementary
 
 | Technology | Purpose |
 |---|---|
-| ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=flat&logo=junit5&logoColor=white)| Automated testing |
-| ![H2](https://img.shields.io/badge/H2-1F4E79?style=flat)| In-memory testing database |
-| ![Chrome DevTools](https://img.shields.io/badge/Chrome_DevTools-4285F4?style=flat&logo=googlechrome&logoColor=white)| Browser debugging and testing |
+| ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit5&logoColor=white)| Automated testing |
+| ![H2](https://img.shields.io/badge/H2-1F4E79?style=for-the-badge)| In-memory testing database |
+| ![Chrome DevTools](https://img.shields.io/badge/Chrome_DevTools-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)| Browser debugging and testing |
 
 <hr style="height: 4px; background-color: #333; border: none;">
 
