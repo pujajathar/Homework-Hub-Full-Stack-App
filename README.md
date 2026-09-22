@@ -1,8 +1,8 @@
 <div align="center">
 
-![Home Page](./preview/homepage.png)
+![Home Page](./preview/home.png)
 
-# 🌈 AaruEdu - Homework Hub : Full Stack Web Application
+# 📚 AaruEdu - Homework Hub: Full-Stack Web Application
 
 > Learn. Grow. Achieve.
  
@@ -71,6 +71,29 @@ AaruEdu Homework Hub is a full-stack web application designed to help elementary
 - Separate notification state for users
 - Confirmation before deleting assignments
 - Responsive design for different screen sizes
+
+## 📸 Key Visuals: 
+### Preview of UI:
+
+**🏠 Home Page and 🔐 Login:** 
+
+![Home Page](./preview/homepage.png) ![Login Page](./preview/login.png)
+
+**👩‍🏫 Teacher Dashboard   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 👨‍👩‍👧 Parent Dashboard  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp; 🎒 Student Dashboard**
+
+<p>
+  <img src="./preview/teacher.png" alt="Teacher Dashboard"> &nbsp;&nbsp;
+  <img src="./preview/parent.png" alt="Parent Dashboard"> &nbsp;&nbsp;
+  <img src="./preview/student.png" alt="Student Dashboard">
+</p>
+
+**📅 Assignment Calendar**   &nbsp;&nbsp;&nbsp;&nbsp;  |  &nbsp;&nbsp;&nbsp;&nbsp;  **📝 Assignment creation and ⬆️ File uploading** &nbsp;&nbsp;&nbsp;&nbsp;  |  &nbsp;&nbsp;&nbsp;&nbsp; **🔔 Notifications**
+
+<p align="top">
+<img src="./preview/calendar.png" alt="Assignment Calendar" style="vertical-align: top;"> &nbsp;&nbsp;
+<img src="./preview/assignment.png" alt="Assignment creation and file uploading">   &nbsp;&nbsp;
+<img src="./preview/notifications.png" alt="Notifications/Alerts" style="vertical-align: top;">
+</p>
 
 ## 🛠️ Technologies Used
 
