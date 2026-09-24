@@ -149,6 +149,7 @@ AaruEdu Homework Hub is a full-stack web application designed to help elementary
 
 | Technology | Purpose |
 |---|---|
+| ![Vitest](https://img.shields.io/badge/Vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white) | Frontend testing |
 | ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=for-the-badge&logo=junit5&logoColor=white)| Automated testing |
 | ![H2](https://img.shields.io/badge/H2-1F4E79?style=for-the-badge)| In-memory testing database |
 | ![Chrome DevTools](https://img.shields.io/badge/Chrome_DevTools-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)| Browser debugging and testing |
