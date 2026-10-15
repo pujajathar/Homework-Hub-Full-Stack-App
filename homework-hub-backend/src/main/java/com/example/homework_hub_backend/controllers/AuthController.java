@@ -1,5 +1,6 @@
 package com.example.homework_hub_backend.controllers;
 
+import com.example.homework_hub_backend.dto.LoginRequest;
 import com.example.homework_hub_backend.dto.RegisterRequest;
 import com.example.homework_hub_backend.models.User;
 import com.example.homework_hub_backend.services.AuthService;
@@ -32,6 +33,17 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.status((HttpStatus.BAD_REQUEST))
                     .body("Error occurred while registering user: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        try {
+            String token = authService.login(request);
+            return ResponseEntity.ok().body("Login successful. Token: " + token);
+        } catch (Exception e) {
+            return ResponseEntity.status((HttpStatus.UNAUTHORIZED))
+                    .body("Error occurred while logging in: " + e.getMessage());
         }
     }
 }
