@@ -1,5 +1,6 @@
 package com.example.homework_hub_backend.services;
 
+import com.example.homework_hub_backend.dto.LoginRequest;
 import com.example.homework_hub_backend.dto.RegisterRequest;
 import com.example.homework_hub_backend.models.User;
 import com.example.homework_hub_backend.repositories.UserRepository;
@@ -11,10 +12,12 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public User register(RegisterRequest request) {
@@ -36,5 +39,19 @@ public class AuthService {
 
         // Save the user to the database
         return userRepository.save(user);
+    }
+
+    public  String login(LoginRequest request) {
+        // Find the user by email
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
+
+        // Check if the password matches
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+
+        // Generate a JWT token for the authenticated user
+        return jwtService.GenerateToken(user.getEmail());
     }
 }
