@@ -2,6 +2,7 @@ package com.example.homework_hub_backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,6 +33,21 @@ public class SecurityConfig {
                                 "/api/auth/register",
                                 "/api/auth/login"
                         ).permitAll()
+
+                        .requestMatchers(
+                                HttpMethod.PUT, "/assignments/**"
+                        ).hasRole("TEACHER")
+
+                        .requestMatchers(
+                                HttpMethod.DELETE, "/assignments/**"
+                        ).hasRole("TEACHER")
+
+                        // All authenticated roles can view assignments.
+                        .requestMatchers(
+                                HttpMethod.GET, "/assignments",
+                                "/assignments/**"
+                        ).hasAnyRole("PARENT", "STUDENT", "TEACHER")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);

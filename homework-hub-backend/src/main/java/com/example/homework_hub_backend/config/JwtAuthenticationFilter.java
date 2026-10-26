@@ -1,5 +1,7 @@
 package com.example.homework_hub_backend.config;
 
+import com.example.homework_hub_backend.models.User;
+import com.example.homework_hub_backend.repositories.UserRepository;
 import com.example.homework_hub_backend.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -7,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -19,9 +20,11 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
+    private final UserRepository userRepository;
 
-    public JwtAuthenticationFilter(JwtService jwtService) {
+    public JwtAuthenticationFilter(JwtService jwtService, UserRepository userRepository) {
         this.jwtService = jwtService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -50,12 +53,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (email != null
                     && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                if (jwtService.isTokenValid(token, email)) {
+                if (userRepository.findByEmail(email).isPresent()
+                && jwtService.isTokenValid(token, email)) {
+                    User databaseUser = userRepository.findByEmail(email).get();
+                    String authority = databaseUser.getRole().name();
 
-                    UserDetails userDetails = User.withUsername(email)
-                            .password("")
-                            .authorities("ROLE_USER")
-                            .build();
+                    UserDetails userDetails =
+                            org.springframework.security.core.userdetails.User
+                                    .withUsername(databaseUser.getEmail())
+                                    .password(databaseUser.getPassword())
+                                    .authorities(authority)
+                                    .build();
 
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(
