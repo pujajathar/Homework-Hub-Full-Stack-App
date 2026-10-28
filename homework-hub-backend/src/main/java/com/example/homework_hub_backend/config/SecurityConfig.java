@@ -48,6 +48,18 @@ public class SecurityConfig {
                                 "/assignments/**"
                         ).hasAnyRole("PARENT", "STUDENT", "TEACHER")
 
+                        // Only teachers can upload attachments
+                                .requestMatchers(HttpMethod.POST, "/attachments/upload/**")
+                                .hasRole("TEACHER")
+
+                        // Only teachers can delete attachments
+                                .requestMatchers(HttpMethod.DELETE, "/attachments/**")
+                                .hasRole("TEACHER")
+
+                        // Parents, students, and teachers can view and download attachments
+                                .requestMatchers(HttpMethod.GET, "/attachments/**")
+                                .hasAnyRole("PARENT", "STUDENT", "TEACHER")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
