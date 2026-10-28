@@ -60,6 +60,22 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/attachments/**")
                                 .hasAnyRole("PARENT", "STUDENT", "TEACHER")
 
+                                // Only teachers can create notifications
+                                .requestMatchers(HttpMethod.POST, "/notifications")
+                                .hasRole("TEACHER")
+
+                        // Only teachers can delete notifications
+                                .requestMatchers(HttpMethod.DELETE, "/notifications/**")
+                                .hasRole("TEACHER")
+
+                        // Only teachers can update notifications
+                                .requestMatchers(HttpMethod.PUT, "/notifications/**")
+                                .hasRole("TEACHER")
+
+                        // Allow parents, students, and teachers to view notifications
+                                .requestMatchers(HttpMethod.GET, "/notifications/**")
+                                .hasAnyRole("PARENT", "STUDENT", "TEACHER")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
