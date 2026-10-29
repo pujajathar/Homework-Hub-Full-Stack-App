@@ -60,7 +60,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/attachments/**")
                                 .hasAnyRole("PARENT", "STUDENT", "TEACHER")
 
-                                // Only teachers can create notifications
+                        // Only teachers can create notifications
                                 .requestMatchers(HttpMethod.POST, "/notifications")
                                 .hasRole("TEACHER")
 
@@ -72,14 +72,25 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.PUT, "/notifications/{id}")
                                 .hasRole("TEACHER")
 
-                        // Parents, students, and teachers can mark notifications as read
+                        // Allow authenticated roles to mark notifications as read
                                 .requestMatchers(HttpMethod.PUT, "/notifications/*/read")
                                 .hasAnyRole("PARENT", "STUDENT", "TEACHER")
 
-                        // Allow parents, students, and teachers to view notifications
-                                .requestMatchers(HttpMethod.GET, "/notifications/**")
-                                .hasAnyRole("PARENT", "STUDENT", "TEACHER")
+                        // Parents can view parent notifications only
+                                .requestMatchers(HttpMethod.GET,
+                                        "/notifications/parent",
+                                        "/notifications/parent/unread")
+                                .hasRole("PARENT")
 
+                        // Students can view student notifications only
+                                .requestMatchers(HttpMethod.GET,
+                                        "/notifications/student",
+                                        "/notifications/student/unread")
+                                .hasRole("STUDENT")
+
+                        // Only teachers can access general notification endpoints
+                                .requestMatchers(HttpMethod.GET, "/notifications", "/notifications/**")
+                                .hasRole("TEACHER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class);
