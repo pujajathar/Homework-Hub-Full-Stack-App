@@ -54,8 +54,20 @@ public class NotificationController {
         return notificationRepository.save(notification);
     }
 
+    @PutMapping("/{id}/read")
+    public Notification markNotificationAsRead(@PathVariable Long id) {
+        return notificationRepository.findById(id)
+                .map(notification -> {
+                    notification.setRead(true);
+                    return notificationRepository.save(notification);
+                })
+                .orElseGet(null);
+    }
+
     @PutMapping("/{id}")
-    public Notification updateNotification(@PathVariable Long id, @RequestBody Notification updatedNotification) {
+    public Notification updateNotification(
+            @PathVariable Long id,
+            @RequestBody Notification updatedNotification) {
         return notificationRepository.findById(id)
                 .map(notification -> {
                     notification.setMessage(updatedNotification.getMessage());
