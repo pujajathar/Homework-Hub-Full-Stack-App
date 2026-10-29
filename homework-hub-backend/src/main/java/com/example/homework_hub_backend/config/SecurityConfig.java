@@ -68,9 +68,13 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.DELETE, "/notifications/**")
                                 .hasRole("TEACHER")
 
-                        // Only teachers can update notifications
-                                .requestMatchers(HttpMethod.PUT, "/notifications/**")
+                        // Only teachers can update notification details
+                                .requestMatchers(HttpMethod.PUT, "/notifications/{id}")
                                 .hasRole("TEACHER")
+
+                        // Parents, students, and teachers can mark notifications as read
+                                .requestMatchers(HttpMethod.PUT, "/notifications/*/read")
+                                .hasAnyRole("PARENT", "STUDENT", "TEACHER")
 
                         // Allow parents, students, and teachers to view notifications
                                 .requestMatchers(HttpMethod.GET, "/notifications/**")
