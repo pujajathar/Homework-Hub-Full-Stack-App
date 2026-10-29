@@ -4,6 +4,7 @@ import com.example.homework_hub_backend.models.Assignment;
 import com.example.homework_hub_backend.models.Notification;
 import com.example.homework_hub_backend.repositories.AssignmentRepository;
 import com.example.homework_hub_backend.repositories.NotificationRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -28,8 +29,10 @@ public class AssignmentController {
     }
 
     @GetMapping("/{id}")
-    public Assignment getAssignmentById(@PathVariable Long id) {
-        return assignmentRepository.findById(id).orElse(null);
+    public ResponseEntity<Assignment> getAssignmentById(@PathVariable Long id) {
+        return assignmentRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -57,7 +60,10 @@ public class AssignmentController {
     }
 
     @PutMapping("/{id}")
-    public Assignment updateAssignment(@PathVariable Long id, @RequestBody Assignment updatedAssignment) {
+    public ResponseEntity<Assignment> updateAssignment(
+            @PathVariable Long id,
+            @RequestBody Assignment updatedAssignment) {
+
         return assignmentRepository.findById(id)
                 .map(assignment -> {
                     assignment.setTitle(updatedAssignment.getTitle());
@@ -65,19 +71,27 @@ public class AssignmentController {
                     assignment.setDueDate(updatedAssignment.getDueDate());
                     assignment.setCategory(updatedAssignment.getCategory());
                     assignment.setStatus(updatedAssignment.getStatus());
-                    // Update category and status
-                    return assignmentRepository.save(assignment);
-                })
-                .orElseGet(null);
-    }
-    @DeleteMapping("/{id}")
-    public void deleteAssignment(@PathVariable Long id) {
 
-        //Delete notifications connected to the assignment first
-        notificationRepository.deleteAll(
-                notificationRepository.findByAssignmentId(id)
-        );
-        //Cascade will delete the assignment's attachment
-        assignmentRepository.deleteById(id);
+                    Assignment savedAssignment = assignmentRepository.save(assignment);
+                    return ResponseEntity.ok(savedAssignment);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAssignment(@PathVariable Long id) {
+        return assignmentRepository.findById(id)
+                .map(assignment -> {
+                    // Delete notifications connected to this assignment first
+                    notificationRepository.deleteAll(
+                            notificationRepository.findByAssignmentId(id)
+                    );
+
+                    // Delete the assignment
+                    assignmentRepository.delete(assignment);
+
+                    return ResponseEntity.noContent().<Void>build();
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
