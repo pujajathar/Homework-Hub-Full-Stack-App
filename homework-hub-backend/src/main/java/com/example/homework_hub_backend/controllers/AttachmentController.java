@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 //Handles API requests related to assignment attachments.
 @RestController
@@ -41,23 +42,49 @@ public class AttachmentController {
     @PostMapping("/upload/{assignmentId}")
     public ResponseEntity<String> uploadFile(
             @PathVariable Long assignmentId,
-            @RequestParam("file")MultipartFile file)
-    {
+            @RequestParam("file") MultipartFile file) {
+
         try {
             Assignment assignment = assignmentRepository.findById(assignmentId)
-                    .orElseThrow(() -> new RuntimeException("Assignment not found"));
-            Path uploadPath = Paths.get(uploadDirectory); //Create path for upload directory
+                    .orElse(null);
 
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
+            if (assignment == null) {
+                return ResponseEntity.notFound().build();
             }
 
-            String fileName = file.getOriginalFilename();
-            Path filePath = uploadPath.resolve(fileName); //Create complete path where file will be saved
+            if (file.isEmpty() || file.getOriginalFilename() == null) {
+                return ResponseEntity.badRequest().body("Please select a file.");
+            }
+
+            // Get a safe filename without directory paths
+            String originalFilename = file.getOriginalFilename()
+                    .replace("\\", "/");
+
+            String fileName = originalFilename.substring(
+                    originalFilename.lastIndexOf('/') + 1
+            );
+
+            if (fileName.isBlank()) {
+                return ResponseEntity.badRequest().body("Invalid filename.");
+            }
+
+            Path uploadPath = Paths.get(uploadDirectory)
+                    .toAbsolutePath()
+                    .normalize();
+
+            Files.createDirectories(uploadPath);
+
+            // Generate a unique storage filename to avoid overwriting files
+            String storageFileName = UUID.randomUUID() + "-" + fileName;
+            Path filePath = uploadPath.resolve(storageFileName).normalize();
+
+            if (!filePath.startsWith(uploadPath)) {
+                return ResponseEntity.badRequest().body("Invalid filename.");
+            }
 
             Files.write(filePath, file.getBytes());
 
-            Attachment attachment =new Attachment();
+            Attachment attachment = new Attachment();
             attachment.setFileName(fileName);
             attachment.setFileType(file.getContentType());
             attachment.setFilePath(filePath.toString());
@@ -65,10 +92,11 @@ public class AttachmentController {
 
             attachmentRepository.save(attachment);
 
-            return ResponseEntity.ok("File uploaded successfully. ");
+            return ResponseEntity.ok("File uploaded successfully.");
 
         } catch (IOException e) {
-            return ResponseEntity.internalServerError().body("File upload failed.");
+            return ResponseEntity.internalServerError()
+                    .body("File upload failed.");
         }
     }
 
