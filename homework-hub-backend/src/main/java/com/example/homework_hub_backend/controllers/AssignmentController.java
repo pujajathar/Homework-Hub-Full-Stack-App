@@ -79,13 +79,19 @@ public class AssignmentController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAssignment(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteAssignment(@PathVariable Long id) {
+        return assignmentRepository.findById(id)
+                .map(assignment -> {
+                    // Delete notifications connected to this assignment first
+                    notificationRepository.deleteAll(
+                            notificationRepository.findByAssignmentId(id)
+                    );
 
-        //Delete notifications connected to the assignment first
-        notificationRepository.deleteAll(
-                notificationRepository.findByAssignmentId(id)
-        );
-        //Cascade will delete the assignment's attachment
-        assignmentRepository.deleteById(id);
+                    // Delete the assignment
+                    assignmentRepository.delete(assignment);
+
+                    return ResponseEntity.noContent().<Void>build();
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
