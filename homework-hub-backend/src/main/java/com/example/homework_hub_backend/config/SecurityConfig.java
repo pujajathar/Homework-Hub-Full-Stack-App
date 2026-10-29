@@ -48,6 +48,22 @@ public class SecurityConfig {
                                 "/assignments/**"
                         ).hasAnyRole("PARENT", "STUDENT", "TEACHER")
 
+                        // Only teachers can create assignments
+                                .requestMatchers(HttpMethod.POST, "/assignments")
+                                .hasRole("TEACHER")
+
+                        // Only teachers can update assignments
+                                .requestMatchers(HttpMethod.PUT, "/assignments/**")
+                                .hasRole("TEACHER")
+
+                        // Only teachers can delete assignments
+                                .requestMatchers(HttpMethod.DELETE, "/assignments/**")
+                                .hasRole("TEACHER")
+
+                        // All authenticated roles can view assignments
+                                .requestMatchers(HttpMethod.GET, "/assignments", "/assignments/**")
+                                .hasAnyRole("PARENT", "STUDENT", "TEACHER")
+
                         // Only teachers can upload attachments
                                 .requestMatchers(HttpMethod.POST, "/attachments/upload/**")
                                 .hasRole("TEACHER")
