@@ -40,10 +40,12 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
             String token = authService.login(request);
-            return ResponseEntity.ok().body("Login successful. Token: " + token);
+            return ResponseEntity.ok(
+                    java.util.Map.of("token", token)
+            );
         } catch (Exception e) {
             return ResponseEntity.status((HttpStatus.UNAUTHORIZED))
-                    .body("Error occurred while logging in: " + e.getMessage());
+                    .body("Invalid email or password.");
         }
     }
 }
